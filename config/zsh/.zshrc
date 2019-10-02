@@ -1,4 +1,5 @@
-# Luke's config for the Zoomer Shell
+# marcusorjames's dotfiles <https://github.com/marcusorjames>
+# Inspired by Luke Smith <https://lukesmith.xyz>
 
 # Enable colors and change prompt:
 autoload -U colors && colors
