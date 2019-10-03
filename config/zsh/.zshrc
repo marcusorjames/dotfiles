@@ -31,6 +31,7 @@ bindkey -v '^?' backward-delete-char
 # Change cursor shape for different vi modes.
 function zle-keymap-select {
   if [[ ${KEYMAP} == vicmd ]] ||
+     [[ ${KEYMAP} == sshcmd ]] ||
      [[ $1 = 'block' ]]; then
     echo -ne '\e[1 q'
   elif [[ ${KEYMAP} == main ]] ||
@@ -79,3 +80,5 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 source /usr/share/powerlevel9k/powerlevel9k.zsh-theme
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
