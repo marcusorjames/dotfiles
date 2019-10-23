@@ -82,3 +82,14 @@ source /usr/share/powerlevel9k/powerlevel9k.zsh-theme
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export ZSH="/home/marcus/.oh-my-zsh"
+
+source $ZSH/oh-my-zsh.sh
+
+plugins=(
+    jira
+	zsh-autosuggestions
+)
+
+JIRA_URL="https://jira.doublebrace.com"
