@@ -5,4 +5,4 @@ These are my dotfiles currently running on Ubuntu 18.04, not tested on any other
 * zsh
 
 ## Managing dotfiles
-I manage my dotfiles using [dotfiler](https://github.com/svetlyak40wt/dotfiler)
+I manage my dotfiles using my own manager [dotty](https://github.com/marcusorjames/dotty)
