@@ -55,6 +55,7 @@ function zle-keymap-select {
 }
 zle -N zle-keymap-select
 zle-line-init() {
+    # TODO: Just this function existing breaks home and end
     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
     echo -ne "\e[5 q"
 }
