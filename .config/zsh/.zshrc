@@ -1,6 +1,15 @@
 # marcusorjames's dotfiles <https://github.com/marcusorjames>
 # Inspired by Luke Smith <https://lukesmith.xyz>
 
+# Oh My Zsh
+export ZSH="/home/marcus/.oh-my-zsh"
+plugins=(
+    jira
+	zsh-autosuggestions
+    git
+)
+source $ZSH/oh-my-zsh.sh
+
 # Enable colors and change prompt:
 autoload -U colors && colors
 PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
@@ -17,7 +26,10 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-# vi mode
+# Auto suggestions - NOT currently working
+bindkey '^ ' autosuggest-accept
+
+# enable vi mode
 bindkey -v
 export KEYTIMEOUT=1
 
@@ -70,26 +82,13 @@ bindkey '^e' edit-command-line
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
 [ -f "$HOME/.config/.aliasrc" ] && source "$HOME/.config/.aliasrc"
 
-# Load zsh-autosugguestions;
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
-# Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
 
 source /usr/share/powerlevel9k/powerlevel9k.zsh-theme
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export ZSH="/home/marcus/.oh-my-zsh"
-
-source $ZSH/oh-my-zsh.sh
-
-plugins=(
-    jira
-	zsh-autosuggestions
-)
+# Load zsh-syntax-highlighting; should be last.
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 JIRA_URL="https://jira.doublebrace.com"
