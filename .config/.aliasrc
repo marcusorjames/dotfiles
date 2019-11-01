@@ -1,0 +1,56 @@
+#!/usr/bin/env sh
+
+# Symfony
+alias console='app/console' 
+
+alias clear-cache='sudo php bin/console cache:clear && sudo chmod -R 0777 var/cache -R && sudo chmod -R 0777 var/logs -R'
+alias clear-cache-old='sudo php7.1 app/console cache:clear && sudo chmod -R 0777 app/cache -R && sudo chmod -R 0777 app/logs -R'
+
+alias clear-cache-prod='sudo php bin/console cache:clear --env=prod --no-debug && sudo chmod -R 0777 var/cache'
+alias clear-cache-prod-old='sudo php7.1 app/console cache:clear --env=prod --no-debug && sudo chmod -R 0777 app/cache'
+
+alias composer-update='clear-cache && composer update && clear-cache'
+alias update-routes='console sonata:page:update-core-routes --site=all'
+
+alias update-db='php bin/console doctrine:schema:update --force'
+alias update-db-old='php7.0 app/console doctrine:schema:update --force'
+alias update-mongo-db='php bin/console doctrine:mongodb:schema:update'
+
+alias assets-install='php bin/console assets:install --symlink'
+alias assets-install-old='php7.0 app/console assets:install --symlink'
+
+alias assets-install-prod='bin/console assets:install --env=prod --no-debug'
+alias assets-install-prod-old='php7.0 app/console assets:install --env=prod --no-debug'
+
+# Sycal
+alias deploy-sycal='bundle exec cap production-new deploy'
+alias rollback-sycal='bundle exec cap production deploy:rollback'
+alias deploy-sycal-staging='bundle exec cap staging-new deploy'
+alias rollback-sycal-staging='bundle exec cap staging-new deploy:rollback'
+
+# PHP Debug
+alias debug='php7.1 -dxdebug.remote_autostart="on" -dxdebug.profiler_enable=1'
+alias debug-sudo='sudo php7.1 -dxdebug.remote_autostart="on" -dxdebug.profiler_enable=1'
+alias debug-old='php5.6 -dxdebug.remote_autostart="on"'
+
+# Docker
+alias dconsole='docker-compose exec php bin/console'
+alias dexec='docker-compose exec'
+alias dcomposer-update='dexec php env COMPOSER_MEMORY_LIMIT=-1 composer update'
+
+# Update
+alias update='sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y'
+
+# Scripts Edit
+se() { du -a ~/.scripts/* ~/.config/* | awk '{print $2}' | fzf | xargs  -r $EDITOR ;}
+
+# Todos
+todos() { du -a ~/Documents/todos/* | awk '{print $2}' | fzf | xargs  -r $EDITOR ;}
+todo() { todos }
+
+# Projects
+projects() { [ ! $# -eq 0 ] && cd ~/Projects/$1 &> /dev/null || cd ~/Projects/$(ls ~/Projects/ | grep "$1" | fzf -1 -0) &> /dev/null ;}
+p() { projects $1 } 
+
+
+[ -f ~/.config/.aliasrc_private ] && source ~/.config/.aliasrc_private
