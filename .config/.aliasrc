@@ -29,10 +29,10 @@ alias \
     ls="ls -hN --color=auto --group-directories-first"
 
 # Scripts Edit
-se() { du -a ~/.scripts/* ~/.config/* | awk '{print $2}' | fzf | xargs  -r $EDITOR ;}
+se() { du -a ~/.scripts/* ~/.config/* | awk '{print $2}' | fzf -1 -0 | xargs  -r $EDITOR ;}
 
 # Todos
-todos() { du -a ~/Documents/todos/* | awk '{print $2}' | fzf | xargs  -r $EDITOR ;}
+todos() { du -a ~/Documents/todos/$1*.md | awk '{print $2}' | fzf -1 -0 | xargs  -r $EDITOR ;}
 todo() { todos }
 
 # Projects
