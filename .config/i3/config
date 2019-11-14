@@ -79,43 +79,40 @@ exec --no-startup-id remaps
 
 # Set Xresources colors:
 set_from_resource $darkblack	color0  #000000
-set_from_resource $black	color8  #000000
-set_from_resource $darkred	color1  #000000
-set_from_resource $red		color9  #000000
+set_from_resource $black	    color8  #000000
+set_from_resource $darkred	    color1  #000000
+set_from_resource $red		    color9  #000000
 set_from_resource $darkgreen	color2  #000000
-set_from_resource $green	color10 #000000
+set_from_resource $green	    color10 #000000
 set_from_resource $darkyellow	color3  #000000
-set_from_resource $yellow	color11 #000000
-set_from_resource $darkblue	color4  #000000
-set_from_resource $blue		color12 #000000
+set_from_resource $yellow	    color11 #000000
+set_from_resource $darkblue	    color4  #000000
+set_from_resource $blue		    color12 #000000
 set_from_resource $darkmagenta	color5  #000000
-set_from_resource $magenta	color13 #000000
-set_from_resource $darkcyan	color6  #000000
-set_from_resource $cyan		color14 #000000
+set_from_resource $magenta	    color13 #000000
+set_from_resource $darkcyan	    color6  #000000
+set_from_resource $cyan		    color14 #000000
 set_from_resource $darkwhite	color7  #000000
-set_from_resource $white	color15 #000000
-set $transparent		#00000000
+set_from_resource $white	    color15 #000000
+set $transparent		                #00000000
 
-#                       BORDER		BACKGROUND	TEXT		INDICATOR   CHILD_BORDER
-client.focused		$red		$red		$magenta	$darkblue	$darkyellow
-client.unfocused	$transparent	$blue		$white		$darkblue		$darkblack
-client.focused_inactive	$transparent	$blue		$white		$darkblue		$darkblack
-client.urgent		$darkred	$darkred	$black		$darkred		$darkred
-client.background $black
+#                       BORDER		    BACKGROUND	TEXT		INDICATOR   CHILD_BORDER
+client.focused          $red		    $red		$magenta	$darkblue	$darkyellow
+client.unfocused    	$transparent	$blue		$white		$darkblue	$darkblack
+client.focused_inactive	$transparent	$blue		$white		$darkblue	$darkblack
+client.urgent		    $darkred	    $darkred	$black		$darkred	$darkred
+client.background       $black
 
 bar {
-	font pango:mono 12
-	#font pango:Source Sans Pro-10 10
-	font pango:PragmataPro 10
-	status_command SCRIPT_DIR=/home/marcus/.scripts/statusbar/ i3blocks 2>/tmp/i3blocks.err
-	#status_command ~/.scripts/bumblebee-status/bumblebee-status -m spotify xrandr pulseaudio battery datetime -t gruvbox-powerline 
+	font pango:mono 10
+	status_command SCRIPT_DIR=~/.scripts/statusbar/ i3blocks 2>/tmp/i3blocks.err
 	colors {
-		statusline $darkwhite
-                separator $cyan
-		focused_workspace  $yellow $darkyellow $darkblack
-                active_workspace   $yellow $yellow $darkwhite
-		inactive_workspace $darkblack $darkblack $white
-		urgent_workspace   $darkblack $darkblack $white
+		statusline          $darkwhite
+        separator           $cyan
+		focused_workspace   $yellow $darkyellow $darkblack
+        active_workspace    $yellow $yellow $darkwhite
+		inactive_workspace  $darkblack $darkblack $white
+		urgent_workspace    $darkblack $darkblack $white
 	}
 	position top
 	mode dock
@@ -306,7 +303,7 @@ for_window [title="mpvfloat"] border pixel 0
 no_focus [title="mpvfloat"]
 
 # #---Function Buttons---# #
-bindsym $mod+F1		exec --no-startup-id groff -kejpt -mom ~/.readme.mom -Tpdf | zathura -
+#bindsym $mod+F1		
 bindsym $mod+F2		restart
 bindsym $mod+F3		exec --no-startup-id displayselect
 bindsym $mod+F4		exec --no-startup-id prompt "Hibernate computer?" "$hibernate"
