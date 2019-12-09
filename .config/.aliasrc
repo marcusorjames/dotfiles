@@ -26,7 +26,8 @@ alias \
     dexec="docker-compose exec" \
     dcomposer-update="dexec php env COMPOSER_MEMORY_LIMIT=-1 composer update" \
     update="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y" \
-    ls="ls -hN --color=auto --group-directories-first"
+    ls="ls -hN --color=auto --group-directories-first" \
+    sync-backgrounds="rclone sync ~/Pictures/Backgrounds Drive:Backgrounds"
 
 # Scripts Edit
 se() { du -a ~/.scripts/* ~/.config/* | awk '{print $2}' | fzf -1 -0 | xargs  -r $EDITOR ;}
