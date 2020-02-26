@@ -1,5 +1,7 @@
 let mapleader=","
 
+filetype plugin on
+
 set guifont=Fira\ Code\ 14
 set mouse=a
 set clipboard=unnamedplus
@@ -8,6 +10,7 @@ set tabstop=4       " number of visual spaces per TAB
 set softtabstop=4   " number of spaces in tab when editing
 set shiftwidth=4    " when indenting with '>', use 4 spaces width
 set expandtab		" on pressing tab, insert 4 spaces
+set autoindent
 
 set list
 set listchars=tab:>\ ,trail:~,extends:\#,nbsp:.
@@ -23,8 +26,9 @@ map <leader>p :!opout <c-r>%<CR><CR>
 map <C-n> :NERDTreeToggle<CR>
 
 " fzf config
-nnoremap <C-p> :Files<cr>
+nnoremap <C-p> :FZF<cr>
 nnoremap <C-b> :Buffers<cr>
+nnoremap <C-f> :Ag<cr>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-i': 'split',
@@ -55,6 +59,8 @@ Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
 Plug 'Yggdroot/indentLine'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'tpope/vim-fugitive'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'preservim/nerdcommenter'
 
 " Autocomplete
 Plug 'ncm2/ncm2'
@@ -87,3 +93,9 @@ xnoremap <leader>p "_dP
 
 " CamelCaseMotion
 let g:camelcasemotion_key = '<leader>'
+
+" GitGutter
+highlight GitGutterAdd    guifg=#009900 ctermfg=2
+highlight GitGutterChange guifg=#bbbb00 ctermfg=3
+highlight GitGutterDelete guifg=#ff2222 ctermfg=2
+set updatetime=100
