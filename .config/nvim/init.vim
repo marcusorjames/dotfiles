@@ -50,6 +50,7 @@ Plug '~/.fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'bkad/CamelCaseMotion'
+Plug 'easymotion/vim-easymotion'
 
 " Php
 Plug 'arnaud-lb/vim-php-namespace'
