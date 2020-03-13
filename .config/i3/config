@@ -156,7 +156,7 @@ bindsym $mod+r 			exec $term -e $FILE
 bindsym $mod+Shift+r		exec --no-startup-id nautilus
 
 bindsym $mod+t			split toggle
-bindsym $mod+Shift+t		gaps inner current set 5; gaps outer current set 5
+bindsym $mod+Shift+t	exec --no-startup-id ddspawn todoist
 
 bindsym $mod+y			exec $term -e calcurse #needs google cal setup
 bindsym $mod+Shift+y		exec --no-startup-id i3resize left

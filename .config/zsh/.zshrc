@@ -93,3 +93,4 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 JIRA_URL="https://jira.doublebrace.com"
+export GOPATH=$HOME/go
