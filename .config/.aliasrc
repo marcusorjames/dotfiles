@@ -29,7 +29,8 @@ alias \
     ls="ls -hN --color=auto --group-directories-first" \
     sync-backgrounds="rclone sync ~/Pictures/Backgrounds Drive:Backgrounds" \
     gcd="git checkout dev" \
-    ggc="gcd && ggl && gbda && gfo"
+    ggc="gcd && ggl && gbda && gfo" \
+    lg="lazygit"
 
 # Scripts Edit
 se() { du -a ~/.scripts/* ~/.config/* | awk '{print $2}' | fzf -1 -0 | xargs  -r $EDITOR ;}
