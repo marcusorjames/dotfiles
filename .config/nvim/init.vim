@@ -2,7 +2,6 @@ let mapleader=","
 
 filetype plugin on
 
-set guifont=Fira\ Code\ 14
 set mouse=a
 set clipboard=unnamedplus
 set number relativenumber
@@ -28,7 +27,7 @@ map <C-n> :NERDTreeToggle<CR>
 " fzf config
 nnoremap <C-p> :FZF<cr>
 nnoremap <C-b> :Buffers<cr>
-nnoremap <C-f> :Ag<cr>
+" nnoremap <C-f> :Ag<cr> Currently replaced with the funky preview thing below
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-i': 'split',
@@ -66,6 +65,8 @@ Plug 'tpope/vim-commentary'
 " Autocomplete
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
+
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 
@@ -94,6 +95,9 @@ xnoremap <leader>p "_dP
 
 " CamelCaseMotion
 let g:camelcasemotion_key = '<leader>'
+
+" devicons
+set encoding=UTF-8
 
 " GitGutter
 highlight GitGutterAdd    guifg=#009900 ctermfg=2
@@ -135,4 +139,47 @@ let g:gutentags_ctags_exclude = [
 \  '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx', '*.xls',
 \]
 
+" fzf with preview todo: Needs to be split into another file and would be nice
+" for buffers as well
+nnoremap <silent> <C-f> :call Fzf_dev()<CR>
+
+" ripgrep
+if executable('rg')
+  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+  set grepprg=rg\ --vimgrep
+  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+endif
+
+" Files + devicons
+function! Fzf_dev()
+  let l:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {2..-1} | head -'.&lines.'"'
+
+  function! s:files()
+    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
+    return s:prepend_icon(l:files)
+  endfunction
+
+  function! s:prepend_icon(candidates)
+    let l:result = []
+    for l:candidate in a:candidates
+      let l:filename = fnamemodify(l:candidate, ':p:t')
+      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
+      call add(l:result, printf('%s %s', l:icon, l:candidate))
+    endfor
+
+    return l:result
+  endfunction
+
+  function! s:edit_file(item)
+    let l:pos = stridx(a:item, ' ')
+    let l:file_path = a:item[pos+1:-1]
+    execute 'silent e' l:file_path
+  endfunction
+
+  call fzf#run({
+        \ 'source': <sid>files(),
+        \ 'sink':   function('s:edit_file'),
+        \ 'options': '-m ' . l:fzf_files_options,
+        \ 'down':    '40%' })
+endfunction
 set updatetime=100

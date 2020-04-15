@@ -1,6 +1,8 @@
 # marcusorjames's dotfiles <https://github.com/marcusorjames>
 # Inspired by Luke Smith <https://lukesmith.xyz>
 
+set guifont=FiraCode\ Nerd\ Font\ 11
+
 # Oh My Zsh
 export ZSH="/home/marcus/.oh-my-zsh"
 plugins=(
