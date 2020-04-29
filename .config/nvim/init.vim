@@ -25,9 +25,9 @@ map <leader>p :!opout <c-r>%<CR><CR>
 map <C-n> :NERDTreeToggle<CR>
 
 " fzf config
-nnoremap <C-p> :FZF<cr>
+" nnoremap <C-p> :FZF<cr> " currently replaced by preview thing below
 nnoremap <C-b> :Buffers<cr>
-" nnoremap <C-f> :Ag<cr> Currently replaced with the funky preview thing below
+nnoremap <C-f> :Ag<cr>
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-i': 'split',
@@ -99,6 +99,9 @@ let g:camelcasemotion_key = '<leader>'
 " devicons
 set encoding=UTF-8
 
+" commentary
+autocmd FileType php setlocal commentstring=//\ %s
+
 " GitGutter
 highlight GitGutterAdd    guifg=#009900 ctermfg=2
 highlight GitGutterChange guifg=#bbbb00 ctermfg=3
@@ -141,7 +144,7 @@ let g:gutentags_ctags_exclude = [
 
 " fzf with preview todo: Needs to be split into another file and would be nice
 " for buffers as well
-nnoremap <silent> <C-f> :call Fzf_dev()<CR>
+nnoremap <silent> <C-p> :call Fzf_dev()<CR>
 
 " ripgrep
 if executable('rg')
