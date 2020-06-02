@@ -29,6 +29,7 @@ alias \
     ls="ls -hN --color=auto --group-directories-first" \
     sync-backgrounds="rclone sync ~/Pictures/Backgrounds Drive:Backgrounds" \
     gcd="git checkout dev" \
+    grbd="git rebase dev" \
     ggc="gcd && ggl && gbda && gfo" \
     lg="lazygit"
 

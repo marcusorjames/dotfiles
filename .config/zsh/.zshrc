@@ -94,5 +94,8 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
+export NVM_DIR="$HOME/.nvm"
+source "$HOME/.nvm/nvm.sh"
+
 JIRA_URL="https://jira.doublebrace.com"
 export GOPATH=$HOME/go

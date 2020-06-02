@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# -- Config --
+CURRENT_TUTORIAL_HANDLE="level-1-apollo-client-with-react"
+CURRENT_PROJECT_HANDLE=null
+YARN_START=false
+
+# -- Defaults --
+PROJECTS_DIR="$HOME/Projects/"
+PROJECT_DIR="${PROJECTS_DIR}${CURRENT_PROJECT_HANDLE}/"
+
+[ -z "$CURRENT_PROJECT_HANDLE" ] && exit 1;
+
+$("$BROWSER" --app="https://www.leveluptutorials.com/tutorials/$CURRENT_TUTORIAL_HANDLE" >> /dev/null)
+code "$PROJECT_DIR"
+$YARN_START && cd $PROJECT_DIR && yarn start
