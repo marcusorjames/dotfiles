@@ -1,188 +1,162 @@
-let mapleader=","
-
-filetype plugin on
-
-set mouse=a
-set clipboard=unnamedplus
-set number relativenumber
-set tabstop=4       " number of visual spaces per TAB
-set softtabstop=4   " number of spaces in tab when editing
-set shiftwidth=4    " when indenting with '>', use 4 spaces width
-set expandtab		" on pressing tab, insert 4 spaces
-set autoindent
-
-set list
-set listchars=tab:>\ ,trail:~,extends:\#,nbsp:.
-
-map <leader>o :setlocal spell! spelllang=en_gb<CR>
-
-" Compile document, be it groff/LaTeX/markdown/etc.
-map <leader>c :w! \| !compiler <c-r>%<CR>
-
-" Open corresponding .pdf/.html or preview
-map <leader>p :!opout <c-r>%<CR><CR>
-
-map <C-n> :NERDTreeToggle<CR>
-
-" fzf config
-" nnoremap <C-p> :FZF<cr> " currently replaced by preview thing below
-nnoremap <C-b> :Buffers<cr>
-nnoremap <C-f> :Ag<cr>
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-i': 'split',
-  \ 'ctrl-s': 'vsplit' }
-let g:fzf_layout = { 'down': '~20%' }
-let g:fzf_buffers_jump = 1
-
-" set php manual
-autocmd FileType php set keywordprg=pman
-
-call plug#begin('~/.vim/plugged')
-Plug 'mnpk/vim-jira-complete'
-Plug 'MarcWeber/vim-addon-local-vimrc'
-Plug 'tpope/vim-surround'
-Plug 'chrisbra/Colorizer'
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug '~/.fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'bkad/CamelCaseMotion'
-Plug 'easymotion/vim-easymotion'
-
-" Php
-Plug 'arnaud-lb/vim-php-namespace'
-Plug 'lvht/phpcd.vim', { 'for': 'php', 'do': 'composer install' }
-
-" General coding
-Plug 'Yggdroot/indentLine'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'tpope/vim-fugitive'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-commentary'
-
-" Autocomplete
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-
-Plug 'ryanoasis/vim-devicons'
-call plug#end()
-
-
-" Autocomplete
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
-let g:deoplete#enable_at_startup = 1
-
-execute pathogen#infect()
+syntax on
 
 try
-source ~/.config/nvim/local.vim
+    source ~/.config/nvim/local.vim
 catch
 endtry
 
+let mapleader=" "
+
+" Searching
+set incsearch " highlight as you search
+set hlsearch " highlight all instances, see esc remap
+
+set hidden
+
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab " tabs are spaces
+set smartindent
+set nowrap
+set smartcase
+
+" Line Numbers
+set nu
+set relativenumber
+
+" Visual
+set noshowmatch " Prevents weird cursor jump on parenth match e.g. (hello)
+set scrolloff=8 " Scrolls at line
+set colorcolumn=80
+set mouse=a " Mouse select visual mode
+set list
+set listchars=tab:>\ ,trail:~,extends:\#,nbsp:.
+
+" Removes the swapfile and instead use undu plugin
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+
+set updatetime=100
+set shortmess+=c " Don't pass messages to |ins-completion-menu|.
+set clipboard=unnamedplus
+set noerrorbells " No dings
+
+call plug#begin('~/.vim/plugged')
+" General
+Plug 'preservim/nerdtree'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-surround'
+
+" General coding
+Plug 'editorconfig/editorconfig-vim'
+Plug 'kdheepak/lazygit.vim', { 'branch': 'nvim-v0.4.3' }
+Plug 'mbbill/undotree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'sheerun/vim-polyglot' " Language packs
+Plug 'tpope/vim-commentary'
+
+" Styling
+Plug 'gruvbox-community/gruvbox'
+Plug 'sainnhe/gruvbox-material'
+
+" Syntax highlighting
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+"Fzf
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'yuki-ycino/fzf-preview.vim'
+
+call plug#end()
+
+"======= Plugin config =====
+
+" undotree
+let g:undotree_WindowLayout = 2
+let g:undotree_SetFocusWhenToggle = 1
+
+" Fzf and Preview
+let g:fzf_preview_use_dev_icons = 1
+
+"========= Styling =========
+if has('termguicolors')
+  set termguicolors
+endif
+colorscheme gruvbox-material
+hi! Normal ctermbg=NONE guibg=NONE
+
+" gruvbox-material (order important for transparency
+let g:gruvbox_material_transparent_background = 1
+set background=dark
+
+"========= Remaps ============
+
+" General
+nnoremap <ESC> :nohlsearch<CR> " On esc remove search highlight
+nnoremap <silent> <leader>lg :LazyGit<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+map <leader>o :setlocal spell! spelllang=en_gb<CR>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+
+" Fzf and Preview
+nnoremap <C-p> :FzfPreviewGitFiles<CR>
+nnoremap <C-b> :FzfPreviewBuffers<CR>
+nnoremap <C-e> :FzfPreviewProjectMruFiles<CR>
+nnoremap <C-f> :Rg<CR>
+
+" GoTo code navigation.
+nmap <silent>gd <Plug>(coc-definition)
+nmap <silent>gy <Plug>(coc-type-definition)
+nmap <silent>gi <Plug>(coc-implementation)
+nmap <silent>gr <Plug>(coc-references)
+nmap <silent>rr <Plug>(coc-rename)
+nmap <silent>g[ <Plug>(coc-diagnostic-prev)
+nmap <silent>g] <Plug>(coc-diagnostic-next)
+nmap <silent> <silent>gp <Plug>(coc-diagnostic-prev-error)
+nmap <silent> <silent>gn <Plug>(coc-diagnostic-next-error)
+nnoremap <silent>cr :CocRestart
+
+" Navigation and Windows
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <leader>= :vertical resize +5<CR>
+nnoremap <leader>- :vertical resize -5<CR>
+nnoremap <leader>0 :vertical resize 100%<CR>
+
+function! NerdTreeToggleFind()
+    if exists("g:NERDTree") && g:NERDTree.IsOpen()
+        NERDTreeClose
+    elseif filereadable(expand('%'))
+        NERDTreeFind
+    else
+        NERDTree
+    endif
+endfunction
+
+nnoremap <C-n> :call NerdTreeToggleFind()<CR>
+
+" Compiling
+map <leader>c :w! \| !compiler <c-r>%<CR>| " Compile document, be it groff/LaTeX/markdown/etc.
+map <leader>p :!opout <c-r>%<CR><CR>| " Open corresponding .pdf/.html or preview doesn't work
+
 " Map Shift Tab to tab left
-" for command mode
 nnoremap <S-Tab> <<
-" for insert mode
-inoremap <S-Tab> <C-d>
+inoremap <S-Tab> <C-d> 
 
 " Delete without setting clipboard
 nnoremap <leader>d "_d
-xnoremap <leader>d "_d
 xnoremap <leader>p "_dP
 
-" CamelCaseMotion
-let g:camelcasemotion_key = '<leader>'
 
-" devicons
-set encoding=UTF-8
+"+========== General Commands ===========
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
 
-" commentary
-autocmd FileType php setlocal commentstring=//\ %s
-
-" GitGutter
-highlight GitGutterAdd    guifg=#009900 ctermfg=2
-highlight GitGutterChange guifg=#bbbb00 ctermfg=3
-highlight GitGutterDelete guifg=#ff2222 ctermfg=2
-
-
-" Gutentags
-let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root  = ['package.json', '.git', '.hg', '.svn']
-let g:gutentags_cache_dir = expand('~/.gutentags_cache')
-let g:gutentags_exclude_filetypes = ['gitcommit', 'gitconfig', 'gitrebase', 'gitsendemail', 'git']
-let g:gutentags_generate_on_new = 1
-let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_empty_buffer = 0
-let g:gutentags_ctags_extra_args = ['--tag-relative=yes','--fields=+ailmnS']
-let g:gutentags_ctags_exclude = [
-\  '*.git', '*.svn', '*.hg',
-\  'cache', 'build', 'dist', 'bin', 'node_modules', 'bower_components',
-\  '*-lock.json',  '*.lock',
-\  '*.min.*',
-\  '*.bak',
-\  '*.zip',
-\  '*.pyc',
-\  '*.class',
-\  '*.sln',
-\  '*.csproj', '*.csproj.user',
-\  '*.tmp',
-\  '*.cache',
-\  '*.vscode',
-\  '*.pdb',
-\  '*.exe', '*.dll', '*.bin',
-\  '*.mp3', '*.ogg', '*.flac',
-\  '*.swp', '*.swo',
-\  '.DS_Store', '*.plist',
-\  '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png', '*.svg',
-\  '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2',
-\  '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx', '*.xls',
-\]
-
-" fzf with preview todo: Needs to be split into another file and would be nice
-" for buffers as well
-nnoremap <silent> <C-p> :call Fzf_dev()<CR>
-
-" ripgrep
-if executable('rg')
-  let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-  set grepprg=rg\ --vimgrep
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
-endif
-
-" Files + devicons
-function! Fzf_dev()
-  let l:fzf_files_options = '--preview "bat --theme="OneHalfDark" --style=numbers,changes --color always {2..-1} | head -'.&lines.'"'
-
-  function! s:files()
-    let l:files = split(system($FZF_DEFAULT_COMMAND), '\n')
-    return s:prepend_icon(l:files)
-  endfunction
-
-  function! s:prepend_icon(candidates)
-    let l:result = []
-    for l:candidate in a:candidates
-      let l:filename = fnamemodify(l:candidate, ':p:t')
-      let l:icon = WebDevIconsGetFileTypeSymbol(l:filename, isdirectory(l:filename))
-      call add(l:result, printf('%s %s', l:icon, l:candidate))
-    endfor
-
-    return l:result
-  endfunction
-
-  function! s:edit_file(item)
-    let l:pos = stridx(a:item, ' ')
-    let l:file_path = a:item[pos+1:-1]
-    execute 'silent e' l:file_path
-  endfunction
-
-  call fzf#run({
-        \ 'source': <sid>files(),
-        \ 'sink':   function('s:edit_file'),
-        \ 'options': '-m ' . l:fzf_files_options,
-        \ 'down':    '40%' })
-endfunction
-set updatetime=100
+autocmd BufWritePre * :call TrimWhitespace()
