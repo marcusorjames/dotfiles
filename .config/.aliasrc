@@ -30,7 +30,7 @@ alias \
     sync-backgrounds="rclone sync ~/Pictures/Backgrounds Drive:Backgrounds" \
     gcd="git checkout dev" \
     grbd="git rebase dev" \
-    ggc="gcd && ggl && gbda && gfo" \
+    ggc="gcd && ggl && gbda && gfa" \
     lg="lazygit"
 
 # Scripts Edit
