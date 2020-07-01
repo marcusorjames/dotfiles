@@ -11,6 +11,7 @@ let mapleader=" "
 set incsearch " highlight as you search
 set hlsearch " highlight all instances, see esc remap
 
+set noshowmode  " to get rid of thing like --INSERT--
 set hidden
 
 set tabstop=4 softtabstop=4
@@ -43,6 +44,16 @@ set shortmess+=c " Don't pass messages to |ins-completion-menu|.
 set clipboard=unnamedplus
 set noerrorbells " No dings
 
+" Folding
+set foldmethod=syntax " syntax highlighting items specify folds
+set foldcolumn=1 " defines 1 col at window left, to indicate folding
+let javaScript_fold=1 " activate folding by JS syntax
+set foldlevelstart=99 " start file with all folds opened
+
+" Filetype presets
+autocmd FileType javascript,javascriptreact setlocal ts=2 sts=2 sw=2
+
+
 call plug#begin('~/.vim/plugged')
 " General
 Plug 'preservim/nerdtree'
@@ -50,12 +61,19 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-surround'
 
 " General coding
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'airblade/vim-rooter' " Auto change to project root on file open
+Plug 'dsznajder/vscode-es7-javascript-react-snippets'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'honza/vim-snippets'
 Plug 'kdheepak/lazygit.vim', { 'branch': 'nvim-v0.4.3' }
 Plug 'mbbill/undotree'
 Plug 'ryanoasis/vim-devicons'
 Plug 'sheerun/vim-polyglot' " Language packs
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'Galooshi/vim-import-js'
 
 " Styling
 Plug 'gruvbox-community/gruvbox'
@@ -72,6 +90,8 @@ Plug 'yuki-ycino/fzf-preview.vim'
 call plug#end()
 
 "======= Plugin config =====
+" Prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " undotree
 let g:undotree_WindowLayout = 2
@@ -94,16 +114,17 @@ set background=dark
 "========= Remaps ============
 
 " General
-nnoremap <ESC> :nohlsearch<CR> " On esc remove search highlight
+nnoremap <ESC> :nohlsearch<CR>| " On esc remove search highlight
 nnoremap <silent> <leader>lg :LazyGit<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 map <leader>o :setlocal spell! spelllang=en_gb<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Fzf and Preview
-nnoremap <C-p> :FzfPreviewGitFiles<CR>
+nnoremap <C-p> :FzfPreviewProjectFiles<CR>
 nnoremap <C-b> :FzfPreviewBuffers<CR>
 nnoremap <C-e> :FzfPreviewProjectMruFiles<CR>
+nnoremap <C-h> :FzfPreviewOldFiles<CR>
 nnoremap <C-f> :Rg<CR>
 
 " GoTo code navigation.
@@ -123,9 +144,9 @@ nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
-nnoremap <leader>= :vertical resize +5<CR>
-nnoremap <leader>- :vertical resize -5<CR>
-nnoremap <leader>0 :vertical resize 100%<CR>
+nnoremap <silent>= :vertical resize +5<CR>
+nnoremap <silent>- :vertical resize -5<CR>
+nnoremap <silent>0 :vertical resize 100%<CR>
 
 function! NerdTreeToggleFind()
     if exists("g:NERDTree") && g:NERDTree.IsOpen()
@@ -145,7 +166,7 @@ map <leader>p :!opout <c-r>%<CR><CR>| " Open corresponding .pdf/.html or preview
 
 " Map Shift Tab to tab left
 nnoremap <S-Tab> <<
-inoremap <S-Tab> <C-d> 
+inoremap <S-Tab> <C-d>
 
 " Delete without setting clipboard
 nnoremap <leader>d "_d
@@ -153,6 +174,8 @@ xnoremap <leader>p "_dP
 
 
 "+========== General Commands ===========
+
+" Autotrim whitespace
 fun! TrimWhitespace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
@@ -160,3 +183,17 @@ fun! TrimWhitespace()
 endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
+
+" Expand snippet with tab
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
