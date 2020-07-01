@@ -2,17 +2,17 @@
 # TODO .env this
 
 # -- Config --
-CURRENT_TUTORIAL_HANDLE="full-stack-graphql-with-apollo-meteor-and-react"
-CURRENT_PROJECT_HANDLE="apollo"
-YARN_START=true
+ CURRENT_TUTORIAL_HANDLE="fullstack-react-with-nextjs"
+ CURRENT_PROJECT_HANDLE="tracker"
+ YARN_START=true
 
-# -- Defaults --
-PROJECTS_DIR="$HOME/Projects/"
-PROJECT_DIR="${PROJECTS_DIR}${CURRENT_PROJECT_HANDLE}/"
+ # -- Defaults --
+ PROJECTS_DIR="$HOME/Projects/"
+ PROJECT_DIR="${PROJECTS_DIR}${CURRENT_PROJECT_HANDLE}/"
 
-$("$BROWSER" --app="https://www.leveluptutorials.com/tutorials/$CURRENT_TUTORIAL_HANDLE" >> /dev/null)
+ $("$BROWSER" --app="https://www.leveluptutorials.com/tutorials/$CURRENT_TUTORIAL_HANDLE" >> /dev/null)
 
-[ -z "$CURRENT_PROJECT_HANDLE" ] && exit 1;
+ [ -z "$CURRENT_PROJECT_HANDLE" ] && exit 1;
 
-code "$PROJECT_DIR"
-$YARN_START && cd $PROJECT_DIR && yarn start
+ $TERMINAL -e "vim $PROJECT_DIR"
+ $YARN_START && cd $PROJECT_DIR && yarn dev
