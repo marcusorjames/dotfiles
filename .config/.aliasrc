@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 alias \
     console="app/console" \
@@ -42,7 +42,7 @@ note() { notes }
 
 # Projects
 projects() { [ ! $# -eq 0 ] && cd ~/Projects/$1 &> /dev/null || cd ~/Projects/$(ls ~/Projects/ | grep "$1" | fzf -1 -0) &> /dev/null ;}
-p() { projects $1 } 
+p() { projects $1 }
 
 command -v nvim >/dev/null && alias vim="nvim" vi="nvim" vimdiff="nvim -d" # Use neovim for vim if present.
 

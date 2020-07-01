@@ -1,10 +1,8 @@
-#!/bin/sh
-# TODO .env this
+#!bin/bash
 
-# -- Config --
- CURRENT_TUTORIAL_HANDLE="fullstack-react-with-nextjs"
- CURRENT_PROJECT_HANDLE="tracker"
- YARN_START=true
+[ -f ~/.config/levelup.conf ] || exit 1;
+
+source ~/.config/levelup.conf
 
  # -- Defaults --
  PROJECTS_DIR="$HOME/Projects/"
@@ -15,4 +13,4 @@
  [ -z "$CURRENT_PROJECT_HANDLE" ] && exit 1;
 
  $TERMINAL -e "vim $PROJECT_DIR"
- $YARN_START && cd $PROJECT_DIR && yarn dev
+ $YARN_START && cd $PROJECT_DIR && yarn $YARN_START
