@@ -19,9 +19,7 @@ set shiftwidth=4
 set expandtab " tabs are spaces
 set smartindent
 set nowrap
-set smartcase
-
-" Line Numbers
+set smartcase " Line Numbers
 set nu
 set relativenumber
 
@@ -46,8 +44,8 @@ set noerrorbells " No dings
 
 " Folding
 set foldmethod=syntax " syntax highlighting items specify folds
-set foldcolumn=1 " defines 1 col at window left, to indicate folding
 let javaScript_fold=1 " activate folding by JS syntax
+let php_folding=1
 set foldlevelstart=99 " start file with all folds opened
 
 " Filetype presets
@@ -74,6 +72,10 @@ Plug 'sheerun/vim-polyglot' " Language packs
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'Galooshi/vim-import-js'
+Plug 'chrisbra/Colorizer'
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+" Plug 'jparise/vim-graphql'
 
 " Styling
 Plug 'gruvbox-community/gruvbox'
@@ -90,20 +92,29 @@ Plug 'yuki-ycino/fzf-preview.vim'
 call plug#end()
 
 "======= Plugin config =====
-" Prettier
+
+" general
+let g:colorizer_auto_color = 1
+let g:fzf_preview_use_dev_icons = 1
+let g:coc_node_path = "~/.nvm/versions/node/v10.15.3/bin/node"
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " undotree
 let g:undotree_WindowLayout = 2
 let g:undotree_SetFocusWhenToggle = 1
 
-" Fzf and Preview
-let g:fzf_preview_use_dev_icons = 1
-
 "========= Styling =========
 if has('termguicolors')
   set termguicolors
 endif
+function! MyHighlights() abort
+    highlight link CocCodeLens Whitespace
+endfunction
+
+augroup MyColors
+    autocmd!
+    autocmd ColorScheme * call MyHighlights()
+augroup END
 colorscheme gruvbox-material
 hi! Normal ctermbg=NONE guibg=NONE
 
@@ -119,6 +130,7 @@ nnoremap <silent> <leader>lg :LazyGit<CR>
 nnoremap <leader>u :UndotreeShow<CR>
 map <leader>o :setlocal spell! spelllang=en_gb<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+map <c-t> :let $VIM_DIR=expand('%:p:h')<CR>:belowright split<CR>:terminal<CR>cd $VIM_DIR<CR>
 
 " Fzf and Preview
 nnoremap <C-p> :FzfPreviewProjectFiles<CR>
@@ -171,7 +183,6 @@ inoremap <S-Tab> <C-d>
 " Delete without setting clipboard
 nnoremap <leader>d "_d
 xnoremap <leader>p "_dP
-
 
 "+========== General Commands ===========
 
