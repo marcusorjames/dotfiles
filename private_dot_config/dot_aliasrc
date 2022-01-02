@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+alias \
+    console="app/console" \
+    clear-cache="sudo php bin/console cache:clear && sudo chmod -R 0777 var/cache -R && sudo chmod -R 0777 var/logs -R" \
+    clear-cache-old="sudo php7.1 app/console cache:clear && sudo chmod -R 0777 app/cache -R && sudo chmod -R 0777 app/logs -R" \
+    clear-cache-prod="sudo php bin/console cache:clear --env=prod --no-debug && sudo chmod -R 0777 var/cache" \
+    clear-cache-prod-old="sudo php7.1 app/console cache:clear --env=prod --no-debug && sudo chmod -R 0777 app/cache" \
+    composer-update="clear-cache && composer update && clear-cache" \
+    update-routes="console sonata:page:update-core-routes --site=all" \
+    update-db="php bin/console doctrine:schema:update --force" \
+    update-db-old="php7.0 app/console doctrine:schema:update --force" \
+    update-mongo-db="php bin/console doctrine:mongodb:schema:update" \
+    assets-install="php bin/console assets:install --symlink" \
+    assets-install-old="php7.0 app/console assets:install --symlink" \
+    assets-install-prod="bin/console assets:install --env=prod --no-debug" \
+    assets-install-prod-old="php7.0 app/console assets:install --env=prod --no-debug" \
+    deploy-sycal="bundle exec cap production deploy" \
+    rollback-sycal="bundle exec cap production deploy:rollback" \
+    deploy-sycal-2="bundle exec cap production-2 deploy" \
+    rollback-sycal-2="bundle exec cap production-2 deploy:rollback" \
+    deploy-sycal-staging="bundle exec cap staging deploy" \
+    rollback-sycal-staging="bundle exec cap staging deploy:rollback" \
+    debug="php -dxdebug.mode="debug"" \
+    debug-sudo="sudo php -dxdebug.remote_autostart="on" -dxdebug.profiler_enable=1" \
+    debug5.6="php5.6 -dxdebug.remote_autostart="on"" \
+    dconsole="docker-compose exec php bin/console" \
+    dexec="docker-compose exec" \
+    dcomposer-update="dexec php env COMPOSER_MEMORY_LIMIT=-1 composer update" \
+    update="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && omz update" \
+    sync-backgrounds="rclone sync ~/Pictures/Backgrounds Drive:Backgrounds" \
+    gcd="git checkout dev" \
+    grbd="git rebase dev" \
+    ggc="gcd && ggl && gbda && gfa" \
+    gcfi="gc --fixup" \
+    grbif="git rebase -i --autosquash" \
+    lg="lazygit" \
+    df='df -x"squashfs"' \
+    cm="chezmoi"
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    ls="ls -hN --color=auto --group-directories-first"
+else
+    #MAC OS does not supporty -N (Literal e.g. hello\ world instead of 'hello world'
+    ls="ls -h --color=auto --group-directories-first"
+fi
+
+# Scripts Edit
+se() { du -a ~/.dotfiles/* | awk '{print $2}' | grep "$1" | fzf -1 -0 | xargs  -r $EDITOR ;}
+
+# Projects
+projects() { [ ! $# -eq 0 ] && cd ~/Projects/$1 &> /dev/null || cd ~/Projects/$(fd --type directory --min-depth 2 --max-depth 2 --base-directory ~/Projects/ | grep "$1" | fzf -1 -0) &> /dev/null ;}
+p() { projects $1 }
+
+command -v nvim >/dev/null && alias vim="nvim" vi="nvim" vimdiff="nvim -d" # Use neovim for vim if present.
+
+vf() { fzf | xargs -r -I % $EDITOR % ;}
+
+[ -f ~/.config/.aliasrc_private ] && source ~/.config/.aliasrc_private

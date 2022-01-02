@@ -1,0 +1,13 @@
+[user]
+	email = marcusorjames@gmail.com
+	name = marcusorjames
+[core]
+	editor = nvim
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	grep = auto
+[pager]
+	branch = false

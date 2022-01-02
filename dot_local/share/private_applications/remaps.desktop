@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Exec=/bin/sh -c "$HOME/.scripts/system/remaps"
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name=Remaps
+Comment=Keyboard remaps and configuration

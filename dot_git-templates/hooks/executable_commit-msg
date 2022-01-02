@@ -1,0 +1,35 @@
+#!/bin/bash
+if [[ ! $(egrep "\[([A-Z]+)-([0-9]+)\]$" "${1}") ]]; then
+    echo
+    printf "\e[1;33mNo Jira issue found in commit\e[0m\n\n"
+fi
+ASPELL=$(which aspell)
+TMPFILE=$(mktemp)
+if [ $? -ne 0 ]; then
+    echo "Aspell not installed - unable to check spelling" >&2
+    exit
+else
+    TEXT=$(sed '/Please\senter\sthe\scommit\smessage/Q' ${1})
+    TEXT=$(sed -e "s/\[[A-Z]*-[0-9]*\]//g" <<< $TEXT)
+    echo $TEXT > $TMPFILE
+    WORDS=$($ASPELL --mode=email --add-email-quote='#' list < "$TMPFILE" | sort -u)
+fi
+if [ -n "$WORDS" ] ; then
+    echo $(sed -e "s/[([A-Z]+)-([0-9]+)\]$/X/G" "$WORDS")
+    printf "\e[1;33mPossible spelling errors found in commit message:\n\n\e[0m\e[0;31m%s\n\n\e[0m\e[1;33mUse git commit --amend to change the message.\e[0m\n\n" "$WORDS" >&2
+else
+    printf "\e[92mSpelling ok\e[0m\n"
+fi
+BRANCH_NAME="$(git symbolic-ref HEAD 2>/dev/null | cut -d / -f 3)"
+if [[ "${BRANCH_NAME}" == "bugfix" ]]; then
+    RES=$(egrep "^Fix.*?\[[A-Z]+-[0-9]+\]$" "${1}")
+    if [[ $? -eq 0 ]]; then
+    printf "\e[92mCommit message ok\e[0m\n"
+    else
+    printf "\e[1;33mPossible commit message errors found in commit message\nUse git commit --amend to change the message.\e[0m\n\n" >&2
+    fi
+fi
+
+trap "{ rm -f $TMPFILE; }" EXIT
+
+
