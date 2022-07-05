@@ -27,7 +27,8 @@ alias \
     dconsole="docker-compose exec php bin/console" \
     dexec="docker-compose exec" \
     dcomposer-update="dexec php env COMPOSER_MEMORY_LIMIT=-1 composer update" \
-    update="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && omz update" \
+    update-quick="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove" \
+    update="update-quick && omz update && znap pull && brew upgrade" \
     sync-backgrounds="rclone sync ~/Pictures/Backgrounds Drive:Backgrounds" \
     gcd="git checkout dev" \
     grbd="git rebase dev" \
