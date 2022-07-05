@@ -110,3 +110,9 @@ complete -F __in_bash_this_works ls
 
 # fzf ctrl-r
 source /usr/share/doc/fzf/examples/key-bindings.zsh
+
+# Set go path
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+
