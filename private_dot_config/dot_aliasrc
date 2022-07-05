@@ -37,7 +37,8 @@ alias \
     grbif="git rebase -i --autosquash" \
     lg="lazygit" \
     df='df -x"squashfs"' \
-    cm="chezmoi"
+    cm="chezmoi" \
+    cms="chezmoi -S ~/.local/share/chezmoi-scripts"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     ls="ls -hN --color=auto --group-directories-first"
