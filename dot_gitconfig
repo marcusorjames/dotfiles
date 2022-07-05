@@ -11,3 +11,5 @@
 	grep = auto
 [pager]
 	branch = false
+[includeIf "gitdir:~/Projects/doublebrace/"]
+  path = .gitconfig-doublebrace
