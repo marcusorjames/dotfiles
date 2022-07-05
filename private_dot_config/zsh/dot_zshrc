@@ -10,13 +10,12 @@ set guifont=FiraCode\ Nerd\ Font\ 11
 export ZSH=$HOME/.znap/ohmyzsh
 
 if [[ -d $ZSH ]]; then
-  source ~/.config/zsh/.znap
-
   plugins=(
     git
   )
 
   source $ZSH/oh-my-zsh.sh
+  source ~/.config/zsh/.znap
 fi
 
 # History in cache directory:
