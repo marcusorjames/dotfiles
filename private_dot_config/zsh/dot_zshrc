@@ -117,4 +117,6 @@ source /usr/share/doc/fzf/examples/key-bindings.zsh
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+# direnv
+eval "$(direnv hook zsh)"
 
