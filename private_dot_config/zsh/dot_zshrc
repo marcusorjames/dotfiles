@@ -16,6 +16,11 @@ if [[ -d $ZSH ]]; then
   source ~/.config/zsh/.znap
 fi
 
+exists()
+{
+  command -v "$1" >/dev/null 2>&1
+}
+
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
@@ -113,7 +118,10 @@ export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
 # direnv
-eval "$(direnv hook zsh)"
+[ $(exists direnv) ] && eval "$(direnv hook zsh)"
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+# rbenv
+if [ -f $HOME/.rbenv/bin ] ; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
