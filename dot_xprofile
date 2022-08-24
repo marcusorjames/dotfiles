@@ -1,8 +1,6 @@
-#/bin/sh
+#!/bin/sh
+# ANNOYINGLY NONE OF THIS WORKS. .xprofile does load because if you have an error it lets you know
+# tried just putting the remaps directly in the file still doesn't fucking work
 
-exists()
-{
-  command -v "$1" >/dev/null 2>&1
-}
-
-[ $(exists remaps) ] && remaps
+~/.scripts/system/remaps
+inputplug -c ~/.scripts/system/remaps
