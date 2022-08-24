@@ -1,0 +1,23 @@
+[global_config]
+  title_use_system_font = False
+  title_font = 3270Medium Nerd Font Medium 9
+[keybindings]
+[profiles]
+  [[default]]
+    background_darkness = 0.65
+    background_type = transparent
+    cursor_color = "#aaaaaa"
+    font = 3270Medium Nerd Font Medium 16
+    show_titlebar = False
+    scrollbar_position = hidden
+    use_system_font = False
+[layouts]
+  [[default]]
+    [[[window0]]]
+      type = Window
+      parent = ""
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+      profile = default
+[plugins]
