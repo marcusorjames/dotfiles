@@ -15,12 +15,6 @@ alias \
     assets-install-old="php7.0 app/console assets:install --symlink" \
     assets-install-prod="bin/console assets:install --env=prod --no-debug" \
     assets-install-prod-old="php7.0 app/console assets:install --env=prod --no-debug" \
-    deploy-sycal="bundle exec cap production deploy" \
-    rollback-sycal="bundle exec cap production deploy:rollback" \
-    deploy-sycal-2="bundle exec cap production-2 deploy" \
-    rollback-sycal-2="bundle exec cap production-2 deploy:rollback" \
-    deploy-sycal-staging="bundle exec cap staging deploy" \
-    rollback-sycal-staging="bundle exec cap staging deploy:rollback" \
     debug="php -dxdebug.mode="debug"" \
     debug-sudo="sudo php -dxdebug.remote_autostart="on" -dxdebug.profiler_enable=1" \
     debug5.6="php5.6 -dxdebug.remote_autostart="on"" \
