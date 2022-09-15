@@ -93,7 +93,8 @@ Plug 'APZelos/blamer.nvim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 
-" Syntax highlighting Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Syntax highlighting
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'aklt/plantuml-syntax'
 
 "Fzf
