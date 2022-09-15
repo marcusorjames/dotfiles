@@ -1,5 +1,4 @@
 syntax on
-
 try
     source ~/.config/nvim/local.vim
 catch
@@ -87,6 +86,8 @@ Plug 'chrisbra/Colorizer'
 Plug 'tpope/vim-dadbod'
 Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'easymotion/vim-easymotion'
+Plug 'mhinz/vim-signify'
+Plug 'APZelos/blamer.nvim'
 
 " Styling
 Plug 'gruvbox-community/gruvbox'
@@ -116,8 +117,12 @@ let g:undotree_SetFocusWhenToggle = 1
 
 " Fugitive
 set diffopt+=vertical
+
+" Blamer
+let g:blamer_enabled = 1
+
 "========= Styling =========
-if has('termguicolors')
+if has('termguicolors') && !$TERM_PROGRAM =~ "Apple_Terminal"
   set termguicolors
 endif
 function! MyHighlights() abort
@@ -179,6 +184,9 @@ nnoremap <leader>l :wincmd l<CR>
 nnoremap <silent>= :vertical resize +5<CR>
 nnoremap <silent>- :vertical resize -5<CR>
 nnoremap <silent>0 :vertical resize 100%<CR>
+
+" Git
+nnoremap <leader>g :BlamerToggle<CR>
 
 function! NerdTreeToggleFind()
     if exists("g:NERDTree") && g:NERDTree.IsOpen()
