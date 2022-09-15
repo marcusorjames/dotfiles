@@ -24,6 +24,7 @@ exists()
 }
 
 # History in cache directory:
+mkdir -p ~/.cache/zsh
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
