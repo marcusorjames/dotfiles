@@ -122,7 +122,7 @@ set diffopt+=vertical
 let g:blamer_enabled = 1
 
 "========= Styling =========
-if has('termguicolors')
+if has('termguicolors') && !$TERM_PROGRAM =~ "Apple_Terminal"
   set termguicolors
 endif
 function! MyHighlights() abort
