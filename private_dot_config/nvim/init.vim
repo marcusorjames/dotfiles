@@ -139,6 +139,7 @@ hi! Normal ctermbg=NONE guibg=NONE
 " gruvbox-material (order important for transparency
 let g:gruvbox_material_transparent_background = 1
 set background=dark
+hi! ColorColumn ctermbg=238
 
 "========= Remaps ============
 
@@ -234,3 +235,4 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+
