@@ -1,6 +1,3 @@
-[user]
-	email = marcusorjames@gmail.com
-	name = marcusorjames
 [core]
 	editor = nvim
 [color]
@@ -11,5 +8,23 @@
 	grep = auto
 [pager]
 	branch = false
+[user]
+	email = marcus.agnusdei@gmail.com
+	name = marcusorjames
+[credential]
+	helper = cache
+[log]
+	mailmap = true
+[gist]
+	home = ~/.gists/
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[pager]
+	branch = false
+[init]
+	templatedir = ~/.git-templates
 [includeIf "gitdir:~/Projects/doublebrace/"]
-  path = .gitconfig-doublebrace
+    path = ~/.gitconfig-doublebrace
+[safe]
+	directory = /var/www/vhosts
+	directory = ~/Projects
