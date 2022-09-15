@@ -77,7 +77,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'honza/vim-snippets'
 Plug 'kdheepak/lazygit.vim'
 Plug 'mbbill/undotree'
-Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons' " https://jumpshare.com/v/1E75pqUtosuyMsPP3Qne works
 Plug 'sheerun/vim-polyglot' " Language packs
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -97,10 +97,9 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'aklt/plantuml-syntax'
 
-"Fzf
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+" Telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 
 call plug#end()
 
@@ -154,11 +153,9 @@ map <c-t> :let $VIM_DIR=expand('%:p:h')<CR>:belowright split<CR>:terminal<CR>cd 
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 " Fzf and Preview
-nnoremap <C-p> :FzfPreviewProjectFiles<CR>
-nnoremap <C-b> :FzfPreviewBuffers<CR>
-nnoremap <C-e> :FzfPreviewProjectMruFiles<CR>
-nnoremap <C-h> :FzfPreviewOldFiles<CR>
-nnoremap <C-f> :Rg<CR>
+nnoremap <C-p> <cmd>Telescope find_files<CR>
+nnoremap <C-b> <cmd>Telescope buffers<CR>
+nnoremap <C-f> <cmd>Telescope live_grep<CR>
 
 " Fugitive
 nmap <leader>gl :diffget //3<CR>
