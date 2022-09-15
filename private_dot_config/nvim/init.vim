@@ -78,6 +78,7 @@ Plug 'honza/vim-snippets'
 Plug 'kdheepak/lazygit.vim'
 Plug 'mbbill/undotree'
 Plug 'ryanoasis/vim-devicons' " https://jumpshare.com/v/1E75pqUtosuyMsPP3Qne works
+Plug 'bryanmylee/vim-colorscheme-icons'
 Plug 'sheerun/vim-polyglot' " Language packs
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
