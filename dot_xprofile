@@ -1,0 +1,6 @@
+#!/bin/sh
+# ANNOYINGLY NONE OF THIS WORKS. .xprofile does load because if you have an error it lets you know
+# tried just putting the remaps directly in the file still doesn't fucking work
+
+~/.scripts/system/remaps
+inputplug -c ~/.scripts/system/remaps

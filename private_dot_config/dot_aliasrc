@@ -15,19 +15,13 @@ alias \
     assets-install-old="php7.0 app/console assets:install --symlink" \
     assets-install-prod="bin/console assets:install --env=prod --no-debug" \
     assets-install-prod-old="php7.0 app/console assets:install --env=prod --no-debug" \
-    deploy-sycal="bundle exec cap production deploy" \
-    rollback-sycal="bundle exec cap production deploy:rollback" \
-    deploy-sycal-2="bundle exec cap production-2 deploy" \
-    rollback-sycal-2="bundle exec cap production-2 deploy:rollback" \
-    deploy-sycal-staging="bundle exec cap staging deploy" \
-    rollback-sycal-staging="bundle exec cap staging deploy:rollback" \
     debug="php -dxdebug.mode="debug"" \
     debug-sudo="sudo php -dxdebug.remote_autostart="on" -dxdebug.profiler_enable=1" \
     debug5.6="php5.6 -dxdebug.remote_autostart="on"" \
     dconsole="docker-compose exec php bin/console" \
     dexec="docker-compose exec" \
     dcomposer-update="dexec php env COMPOSER_MEMORY_LIMIT=-1 composer update" \
-    update-quick="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove" \
+    update-quick="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y" \
     update="update-quick && omz update && znap pull && brew upgrade" \
     sync-backgrounds="rclone sync ~/Pictures/Backgrounds Drive:Backgrounds" \
     gcd="git checkout dev" \

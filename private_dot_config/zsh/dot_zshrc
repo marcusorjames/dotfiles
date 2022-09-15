@@ -14,21 +14,19 @@ if [[ -d $ZSH ]]; then
     git
   )
 
-  source $ZSH/oh-my-zsh.sh
   source ~/.config/zsh/.znap
 fi
+
+
+exists()
+{
+  command -v "$1" >/dev/null 2>&1
+}
 
 # History in cache directory:
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
-
-# Basic auto/tab complete:
-autoload -U compinit
-zstyle ':completion:*' menu select
-zmodload zsh/complist
-compinit
-_comp_options+=(globdots) # Include hidden files.
 
 # enable vi mode
 bindkey -v
@@ -106,6 +104,10 @@ if [[ -d $compat_dir && -r $compat_dir && -x $compat_dir ]]; then
     done
 fi
 
+# zsh-autocomplete
+zstyle ':autocomplete:*' min-input 3
+zstyle ':autocomplete:*' widget-style menu-select
+
 function __in_bash_this_works() { COMPREPLY=(blah); }
 
 complete -F __in_bash_this_works ls
@@ -117,6 +119,16 @@ source /usr/share/doc/fzf/examples/key-bindings.zsh
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
-# direnv
-eval "$(direnv hook zsh)"
+# Set scripts path
+export PATH=$PATH$( find $HOME/.scripts/ -type d -printf ":%p" )
 
+# direnv
+[ $(exists direnv) ] && eval "$(direnv hook zsh)"
+
+# rbenv
+if [ -f $HOME/.rbenv/bin ] ; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
+
+remaps
