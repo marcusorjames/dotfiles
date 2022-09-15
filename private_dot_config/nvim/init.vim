@@ -93,8 +93,7 @@ Plug 'APZelos/blamer.nvim'
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 
-" Syntax highlighting
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Syntax highlighting Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'aklt/plantuml-syntax'
 
 "Fzf
@@ -209,7 +208,7 @@ nnoremap <S-Tab> <<
 inoremap <S-Tab> <C-d>
 
 " Delete without setting clipboard
-nnoremap <leader>d "_d
+xnoremap <leader>d "_d
 xnoremap <leader>p "_dP
 
 "+========== General Commands ===========
