@@ -12,7 +12,8 @@
 	email = marcus.agnusdei@gmail.com
 	name = marcusorjames
 [credential]
-	helper = cache
+	helper = !aws codecommit credential-helper $@
+	UseHttpPath = true
 [log]
 	mailmap = true
 [gist]
