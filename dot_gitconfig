@@ -9,7 +9,7 @@
 [pager]
 	branch = false
 [user]
-	email = marcus.agnusdei@gmail.com
+	email = marcusorjames@gmail.com
 	name = marcusorjames
 [credential]
 	helper = !aws codecommit credential-helper $@
