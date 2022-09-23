@@ -123,6 +123,9 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # Set scripts path
 export PATH=$PATH$( find $HOME/.scripts/ -type d -printf ":%p" )
 
+# Set yarn path
+[ $(exists yarn) ] && export PATH="$PATH:$(yarn global bin)"
+
 # direnv
 [ $(exists direnv) ] && eval "$(direnv hook zsh)"
 
