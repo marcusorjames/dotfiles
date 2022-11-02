@@ -89,6 +89,8 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-signify'
 Plug 'APZelos/blamer.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 " Styling
 Plug 'gruvbox-community/gruvbox'
@@ -120,6 +122,10 @@ set diffopt+=vertical
 
 " Blamer
 let g:blamer_enabled = 1
+
+" Coc
+let g:coc_snippet_next = '<tab>'
+let g:coc_node_path = '/usr/local/bin/node-coc'
 
 "========= Styling =========
 if has('termguicolors') && !$TERM_PROGRAM =~ "Apple_Terminal"
@@ -234,5 +240,4 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-let g:coc_snippet_next = '<tab>'
 
