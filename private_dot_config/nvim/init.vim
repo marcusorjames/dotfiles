@@ -123,6 +123,10 @@ set diffopt+=vertical
 " Blamer
 let g:blamer_enabled = 1
 
+" Coc
+let g:coc_snippet_next = '<tab>'
+let g:coc_node_path = '/usr/local/bin/node-coc'
+
 "========= Styling =========
 if has('termguicolors') && !$TERM_PROGRAM =~ "Apple_Terminal"
   set termguicolors
@@ -236,5 +240,4 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-let g:coc_snippet_next = '<tab>'
 
