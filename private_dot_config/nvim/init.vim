@@ -89,6 +89,8 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-signify'
 Plug 'APZelos/blamer.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 " Styling
 Plug 'gruvbox-community/gruvbox'
