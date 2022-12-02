@@ -8,7 +8,6 @@ set guifont=FiraCode\ Nerd\ Font\ 11
 
 # Oh My Zsh and Zsh plugins via znap
 export ZSH=$HOME/.znap/ohmyzsh
-
 if [[ -d $ZSH ]]; then
   plugins=(
     git
@@ -124,10 +123,10 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH=$PATH$( find $HOME/.scripts/ -type d -printf ":%p" )
 
 # Set yarn path
-[ $(exists yarn) ] && export PATH="$PATH:$(yarn global bin)"
+exists 'yarn' && export PATH="$PATH:$(yarn global bin)"
 
 # direnv
-[ $(exists direnv) ] && eval "$(direnv hook zsh)"
+exists 'direnv' && eval "$(direnv hook zsh)"
 
 # rbenv
 if [ -f $HOME/.rbenv/bin ] ; then
