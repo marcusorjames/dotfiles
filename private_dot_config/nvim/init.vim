@@ -161,6 +161,9 @@ map <c-t> :let $VIM_DIR=expand('%:p:h')<CR>:belowright split<CR>:terminal<CR>cd 
 vmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 " Fzf and Preview
+" nnoremap <C-p> <cmd>Telescope find_files hidden=true<CR> Need to exclude git
+" nnoremap <C-b> <cmd>Telescope buffers hidden=true<CR>
+" nnoremap <C-f> <cmd>Telescope live_grep hidden=true<CR>
 nnoremap <C-p> <cmd>Telescope find_files<CR>
 nnoremap <C-b> <cmd>Telescope buffers<CR>
 nnoremap <C-f> <cmd>Telescope live_grep<CR>
