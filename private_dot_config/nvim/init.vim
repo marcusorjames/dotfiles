@@ -6,8 +6,7 @@ endtry
 
 let mapleader=" "
 
-" Searching
-set incsearch " highlight as you search
+" Searching set incsearch " highlight as you search
 set hlsearch " highlight all instances, see esc remap
 
 set noshowmode  " to get rid of thing like --INSERT--
@@ -49,9 +48,6 @@ set foldlevelstart=99 " start file with all folds opened
 
 " Filetype presets
 autocmd FileType javascript,javascriptreact setlocal ts=2 sts=2 sw=2
-
-" Node
-" let g:coc_node_path = '/home/marcus/.nvm/versions/node/v10.15.3/bin/node' - REMOVE!!!
 
 " Auto install Plug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
@@ -96,9 +92,11 @@ Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 
-" Syntax highlighting
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'aklt/plantuml-syntax'
+" Language Server
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig'
+Plug 'hrsh7th/nvim-compe'
 
 " Telescope
 Plug 'nvim-lua/plenary.nvim'
@@ -111,7 +109,6 @@ call plug#end()
 " general
 let g:colorizer_auto_color = 1
 let g:fzf_preview_use_dev_icons = 1
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " undotree
 let g:undotree_WindowLayout = 2
@@ -131,14 +128,7 @@ let g:coc_node_path = '/usr/local/bin/node-coc'
 if has('termguicolors') && !$TERM_PROGRAM =~ "Apple_Terminal"
   set termguicolors
 endif
-function! MyHighlights() abort
-    highlight link CocCodeLens Whitespace
-endfunction
 
-augroup MyColors
-    autocmd!
-    autocmd ColorScheme * call MyHighlights()
-augroup END
 colorscheme gruvbox-material
 hi! Normal ctermbg=NONE guibg=NONE
 
@@ -157,9 +147,6 @@ map <leader>o :setlocal spell! spelllang=en_gb<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 map <c-t> :let $VIM_DIR=expand('%:p:h')<CR>:belowright split<CR>:terminal<CR>cd $VIM_DIR<CR>
 
-" Pretier
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
 " Fzf and Preview
 " nnoremap <C-p> <cmd>Telescope find_files hidden=true<CR> Need to exclude git
 " nnoremap <C-b> <cmd>Telescope buffers hidden=true<CR>
@@ -172,17 +159,6 @@ nnoremap <C-f> <cmd>Telescope live_grep<CR>
 nmap <leader>gl :diffget //3<CR>
 nmap <leader>gh :diffget //2<CR>
 nmap <leader>gs :G<CR>
-" GoTo code navigation.
-nmap <silent>gd <Plug>(coc-definition)
-nmap <silent>gy <Plug>(coc-type-definition)
-nmap <silent>gi <Plug>(coc-implementation)
-nmap <silent>gr <Plug>(coc-references)
-nmap <silent>rr <Plug>(coc-rename)
-nmap <silent>g[ <Plug>(coc-diagnostic-prev)
-nmap <silent>g] <Plug>(coc-diagnostic-next)
-nmap <silent> <silent>gp <Plug>(coc-diagnostic-prev-error)
-nmap <silent> <silent>gn <Plug>(coc-diagnostic-next-error)
-nnoremap <silent>cr :CocRestart
 
 " Navigation and Windows
 nnoremap <leader>h :wincmd h<CR>
@@ -230,13 +206,6 @@ fun! TrimWhitespace()
 endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
-
-" Expand snippet with tab
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
 
 function! s:check_back_space() abort
   let col = col('.') - 1
