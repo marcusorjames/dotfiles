@@ -1,0 +1,30 @@
+#!/sh
+# marcusorjames's zsh-snap config
+
+ZNAP_DIR=~/.znap
+ZNAP_GIT_DIR="$ZNAP_DIR/zsh-snap"
+ZNAP_CONFIG="$ZNAP_GIT_DIR/znap.zsh"
+
+# Ensure zsnap directory exists
+mkdir -p $ZNAP_DIR
+
+# Download Znap, if it's not there yet.
+[[ -f "$ZNAP_GIT_DIR/znap.zsh" ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git $ZNAP_GIT_DIR
+
+# Start znap
+source $ZNAP_CONFIG
+
+# ohmyzsh plugins
+znap source ohmyzsh/ohmyzsh \
+    'lib/git.zsh' 'lib/theme-and-appearance.zsh' plugins/git 'lib/cli.zsh'
+
+# zsh plugins
+znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-syntax-highlighting
+znap source marlonrichert/zsh-autocomplete
+
+# zsh theme
+znap prompt ohmyzsh/ohmyzsh robbyrussell
+
