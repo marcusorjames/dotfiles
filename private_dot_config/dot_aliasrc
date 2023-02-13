@@ -29,6 +29,7 @@ alias \
     ggc="gcd && ggl && gbda && gfa" \
     gcfi="gc --fixup" \
     grbif="git rebase -i --autosquash" \
+    gpb="gl && gcb" \
     lg="lazygit" \
     df='df -x"squashfs"' \
     cm="chezmoi" \
