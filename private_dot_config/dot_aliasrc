@@ -22,7 +22,7 @@ alias \
     dexec="docker-compose exec" \
     dcomposer-update="dexec php env COMPOSER_MEMORY_LIMIT=-1 composer update" \
     update-quick="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y" \
-    update="update-quick && omz update && znap pull && brew upgrade" \
+    update="update-quick && omz update && znap pull && brew upgrade && flatpak update -y" \
     sync-backgrounds="rclone sync ~/Pictures/Backgrounds Drive:Backgrounds" \
     gcd="git checkout dev" \
     grbd="git rebase dev" \
@@ -33,7 +33,8 @@ alias \
     lg="lazygit" \
     df='df -x"squashfs"' \
     cm="chezmoi" \
-    cms="chezmoi -S ~/.local/share/chezmoi-scripts"
+    cms="chezmoi -S ~/.local/share/chezmoi-scripts" \
+    bye="update && sudo shutdown now"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     ls="ls -hN --color=auto --group-directories-first"

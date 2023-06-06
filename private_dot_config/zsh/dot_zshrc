@@ -14,6 +14,8 @@ if [[ -d $ZSH ]]; then
   )
 
   source ~/.config/zsh/.znap
+
+  # source $ZSH/oh-my-zsh.sh // This breaks everything big sad see znap config
 fi
 
 
@@ -118,6 +120,9 @@ source /usr/share/doc/fzf/examples/key-bindings.zsh
 # Set go path
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+# Set composer path
+export PATH=/.composer/vendor/bin
 
 # Set scripts path
 export PATH=$PATH$( find $HOME/.scripts/ -type d -printf ":%p" )

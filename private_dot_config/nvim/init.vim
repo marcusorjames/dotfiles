@@ -88,6 +88,11 @@ Plug 'APZelos/blamer.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
 
+Plug 'kana/vim-textobj-user'
+Plug 'jwalton512/vim-blade'
+Plug 'adriaanzon/vim-textobj-blade-directive'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+
 " Styling
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
@@ -147,8 +152,8 @@ map <leader>o :setlocal spell! spelllang=en_gb<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 map <c-t> :let $VIM_DIR=expand('%:p:h')<CR>:belowright split<CR>:terminal<CR>cd $VIM_DIR<CR>
 
-" Fzf and Preview
-" nnoremap <C-p> <cmd>Telescope find_files hidden=true<CR> Need to exclude git
+" TODO: Use hidden=true but need to exclude git
+" nnoremap <C-p> <cmd>Telescope find_files hidden=true<CR>
 " nnoremap <C-b> <cmd>Telescope buffers hidden=true<CR>
 " nnoremap <C-f> <cmd>Telescope live_grep hidden=true<CR>
 nnoremap <C-p> <cmd>Telescope find_files<CR>
