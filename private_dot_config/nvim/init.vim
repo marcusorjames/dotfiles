@@ -50,9 +50,6 @@ set foldlevelstart=99 " start file with all folds opened
 " Filetype presets
 autocmd FileType javascript,javascriptreact setlocal ts=2 sts=2 sw=2
 
-" Node
-" let g:coc_node_path = '/home/marcus/.nvm/versions/node/v10.15.3/bin/node' - REMOVE!!!
-
 " Auto install Plug
 let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
 if empty(glob(data_dir . '/autoload/plug.vim'))
@@ -77,7 +74,8 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'honza/vim-snippets'
 Plug 'kdheepak/lazygit.vim'
 Plug 'mbbill/undotree'
-Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons' " https://jumpshare.com/v/1E75pqUtosuyMsPP3Qne works
+Plug 'bryanmylee/vim-colorscheme-icons'
 Plug 'sheerun/vim-polyglot' " Language packs
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
