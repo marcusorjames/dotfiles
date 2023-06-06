@@ -86,19 +86,26 @@ Plug 'kristijanhusak/vim-dadbod-ui'
 Plug 'easymotion/vim-easymotion'
 Plug 'mhinz/vim-signify'
 Plug 'APZelos/blamer.nvim'
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'kana/vim-textobj-user'
+Plug 'jwalton512/vim-blade'
+Plug 'adriaanzon/vim-textobj-blade-directive'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 
 " Styling
 Plug 'gruvbox-community/gruvbox'
 Plug 'sainnhe/gruvbox-material'
 
-" Syntax highlighting
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'aklt/plantuml-syntax'
+" Language Server
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig'
+Plug 'hrsh7th/nvim-compe'
 
-"Fzf
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+" Telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
 
 call plug#end()
 
@@ -107,7 +114,6 @@ call plug#end()
 " general
 let g:colorizer_auto_color = 1
 let g:fzf_preview_use_dev_icons = 1
-command! -nargs=0 Prettier :CocCommand prettier.formatFile
 
 " undotree
 let g:undotree_WindowLayout = 2
@@ -119,24 +125,22 @@ set diffopt+=vertical
 " Blamer
 let g:blamer_enabled = 1
 
+" Coc
+let g:coc_snippet_next = '<tab>'
+let g:coc_node_path = '/usr/local/bin/node-coc'
+
 "========= Styling =========
 if has('termguicolors') && !$TERM_PROGRAM =~ "Apple_Terminal"
   set termguicolors
 endif
-function! MyHighlights() abort
-    highlight link CocCodeLens Whitespace
-endfunction
 
-augroup MyColors
-    autocmd!
-    autocmd ColorScheme * call MyHighlights()
-augroup END
 colorscheme gruvbox-material
 hi! Normal ctermbg=NONE guibg=NONE
 
 " gruvbox-material (order important for transparency
 let g:gruvbox_material_transparent_background = 1
 set background=dark
+hi! ColorColumn ctermbg=238
 
 "========= Remaps ============
 
@@ -148,31 +152,18 @@ map <leader>o :setlocal spell! spelllang=en_gb<CR>
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 map <c-t> :let $VIM_DIR=expand('%:p:h')<CR>:belowright split<CR>:terminal<CR>cd $VIM_DIR<CR>
 
-" Pretier
-vmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-" Fzf and Preview
-nnoremap <C-p> :FzfPreviewProjectFiles<CR>
-nnoremap <C-b> :FzfPreviewBuffers<CR>
-nnoremap <C-e> :FzfPreviewProjectMruFiles<CR>
-nnoremap <C-h> :FzfPreviewOldFiles<CR>
-nnoremap <C-f> :Rg<CR>
+" TODO: Use hidden=true but need to exclude git
+" nnoremap <C-p> <cmd>Telescope find_files hidden=true<CR>
+" nnoremap <C-b> <cmd>Telescope buffers hidden=true<CR>
+" nnoremap <C-f> <cmd>Telescope live_grep hidden=true<CR>
+nnoremap <C-p> <cmd>Telescope find_files<CR>
+nnoremap <C-b> <cmd>Telescope buffers<CR>
+nnoremap <C-f> <cmd>Telescope live_grep<CR>
 
 " Fugitive
 nmap <leader>gl :diffget //3<CR>
 nmap <leader>gh :diffget //2<CR>
 nmap <leader>gs :G<CR>
-" GoTo code navigation.
-nmap <silent>gd <Plug>(coc-definition)
-nmap <silent>gy <Plug>(coc-type-definition)
-nmap <silent>gi <Plug>(coc-implementation)
-nmap <silent>gr <Plug>(coc-references)
-nmap <silent>rr <Plug>(coc-rename)
-nmap <silent>g[ <Plug>(coc-diagnostic-prev)
-nmap <silent>g] <Plug>(coc-diagnostic-next)
-nmap <silent> <silent>gp <Plug>(coc-diagnostic-prev-error)
-nmap <silent> <silent>gn <Plug>(coc-diagnostic-next-error)
-nnoremap <silent>cr :CocRestart
 
 " Navigation and Windows
 nnoremap <leader>h :wincmd h<CR>
@@ -207,7 +198,7 @@ nnoremap <S-Tab> <<
 inoremap <S-Tab> <C-d>
 
 " Delete without setting clipboard
-nnoremap <leader>d "_d
+xnoremap <leader>d "_d
 xnoremap <leader>p "_dP
 
 "+========== General Commands ===========
@@ -221,16 +212,9 @@ endfun
 
 autocmd BufWritePre * :call TrimWhitespace()
 
-" Expand snippet with tab
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-let g:coc_snippet_next = '<tab>'
+
