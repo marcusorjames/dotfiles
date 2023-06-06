@@ -33,7 +33,8 @@ alias \
     lg="lazygit" \
     df='df -x"squashfs"' \
     cm="chezmoi" \
-    cms="chezmoi -S ~/.local/share/chezmoi-scripts"
+    cms="chezmoi -S ~/.local/share/chezmoi-scripts" \
+    bye="update && sudo shutdown now"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     ls="ls -hN --color=auto --group-directories-first"
