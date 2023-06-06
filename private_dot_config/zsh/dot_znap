@@ -18,7 +18,7 @@ source $ZNAP_CONFIG
 
 # ohmyzsh plugins
 znap source ohmyzsh/ohmyzsh \
-    'lib/git.zsh' 'lib/theme-and-appearance.zsh' plugins/git 'lib/cli.zsh'
+    'lib/git.zsh' 'lib/theme-and-appearance.zsh' plugins/git 'lib/cli.zsh' # This adds cli but doesn't update properly see zshrc oh-my-zsh source
 
 # zsh plugins
 znap source zsh-users/zsh-autosuggestions

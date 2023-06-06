@@ -8,13 +8,14 @@ set guifont=FiraCode\ Nerd\ Font\ 11
 
 # Oh My Zsh and Zsh plugins via znap
 export ZSH=$HOME/.znap/ohmyzsh
-
 if [[ -d $ZSH ]]; then
   plugins=(
     git
   )
 
   source ~/.config/zsh/.znap
+
+  # source $ZSH/oh-my-zsh.sh // This breaks everything big sad see znap config
 fi
 
 
@@ -24,6 +25,7 @@ exists()
 }
 
 # History in cache directory:
+mkdir -p ~/.cache/zsh
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
@@ -119,11 +121,17 @@ source /usr/share/doc/fzf/examples/key-bindings.zsh
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 
+# Set composer path
+export PATH=/.composer/vendor/bin
+
 # Set scripts path
 export PATH=$PATH$( find $HOME/.scripts/ -type d -printf ":%p" )
 
+# Set yarn path
+exists 'yarn' && export PATH="$PATH:$(yarn global bin)"
+
 # direnv
-[ $(exists direnv) ] && eval "$(direnv hook zsh)"
+exists 'direnv' && eval "$(direnv hook zsh)"
 
 # rbenv
 if [ -f $HOME/.rbenv/bin ] ; then
