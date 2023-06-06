@@ -3,3 +3,5 @@ set surround
 set easymotion
 set commentary
 set argtextobj
+set clipboard+=ideaput
+set multicursor
