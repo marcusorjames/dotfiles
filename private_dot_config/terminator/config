@@ -13,6 +13,7 @@
     foreground_color = "#ebdbb2"
     show_titlebar = False
     scrollbar_position = hidden
+    scrollback_infinite = True
     use_system_font = False
 [layouts]
   [[default]]

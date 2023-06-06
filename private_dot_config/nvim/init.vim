@@ -6,8 +6,7 @@ endtry
 
 let mapleader=" "
 
-" Searching
-set incsearch " highlight as you search
+" Searching set incsearch " highlight as you search
 set hlsearch " highlight all instances, see esc remap
 
 set noshowmode  " to get rid of thing like --INSERT--
@@ -88,6 +87,7 @@ Plug 'mhinz/vim-signify'
 Plug 'APZelos/blamer.nvim'
 Plug 'nvim-treesitter/nvim-treesitter'
 Plug 'nvim-treesitter/nvim-treesitter-context'
+
 Plug 'kana/vim-textobj-user'
 Plug 'jwalton512/vim-blade'
 Plug 'adriaanzon/vim-textobj-blade-directive'
