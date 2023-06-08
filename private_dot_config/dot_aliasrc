@@ -15,9 +15,7 @@ alias \
     assets-install-old="php7.0 app/console assets:install --symlink" \
     assets-install-prod="bin/console assets:install --env=prod --no-debug" \
     assets-install-prod-old="php7.0 app/console assets:install --env=prod --no-debug" \
-    debug="php -dxdebug.mode="debug"" \
-    debug-sudo="sudo php -dxdebug.remote_autostart="on" -dxdebug.profiler_enable=1" \
-    debug5.6="php5.6 -dxdebug.remote_autostart="on"" \
+    debug="export XDEBUG_MODE=debug XDEBUG_SESSION=1" \
     dconsole="docker-compose exec php bin/console" \
     dexec="docker-compose exec" \
     dcomposer-update="dexec php env COMPOSER_MEMORY_LIMIT=-1 composer update" \
