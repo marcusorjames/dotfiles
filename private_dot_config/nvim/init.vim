@@ -201,6 +201,10 @@ inoremap <S-Tab> <C-d>
 xnoremap <leader>d "_d
 xnoremap <leader>p "_dP
 
+" Visual Multi
+let g:VM_maps = {}
+let g:VM_maps["Find Under"] = '<C-d>'
+
 "+========== General Commands ===========
 
 " Autotrim whitespace
