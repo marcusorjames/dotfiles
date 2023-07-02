@@ -34,7 +34,8 @@ alias \
     df='df -x"squashfs"' \
     cm="chezmoi" \
     cms="chezmoi -S ~/.local/share/chezmoi-scripts" \
-    bye="update-quick && sudo shutdown now"
+    bye="update-quick && sudo shutdown now" \
+    lsa="ls -lah"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     ls="ls -hN --color=auto --group-directories-first"
