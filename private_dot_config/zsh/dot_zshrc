@@ -1,4 +1,4 @@
-# marcusorjames's dotfiles <https://github.com/marcusorjames>
+###### marcusorjames's zsh config <https://github.com/marcusorjames> ######
 # Inspired by Luke Smith <https://lukesmith.xyz>
 
 export TERM="xterm-256color"
