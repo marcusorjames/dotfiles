@@ -1,24 +1,7 @@
 #!/usr/bin/env bash
 
 alias \
-    console="app/console" \
-    clear-cache="sudo php bin/console cache:clear && sudo chmod -R 0777 var/cache -R && sudo chmod -R 0777 var/logs -R" \
-    clear-cache-old="sudo php7.1 app/console cache:clear && sudo chmod -R 0777 app/cache -R && sudo chmod -R 0777 app/logs -R" \
-    clear-cache-prod="sudo php bin/console cache:clear --env=prod --no-debug && sudo chmod -R 0777 var/cache" \
-    clear-cache-prod-old="sudo php7.1 app/console cache:clear --env=prod --no-debug && sudo chmod -R 0777 app/cache" \
-    composer-update="clear-cache && composer update && clear-cache" \
-    update-routes="console sonata:page:update-core-routes --site=all" \
-    update-db="php bin/console doctrine:schema:update --force" \
-    update-db-old="php7.0 app/console doctrine:schema:update --force" \
-    update-mongo-db="php bin/console doctrine:mongodb:schema:update" \
-    assets-install="php bin/console assets:install --symlink" \
-    assets-install-old="php7.0 app/console assets:install --symlink" \
-    assets-install-prod="bin/console assets:install --env=prod --no-debug" \
-    assets-install-prod-old="php7.0 app/console assets:install --env=prod --no-debug" \
     debug="export XDEBUG_MODE=debug XDEBUG_SESSION=1" \
-    dconsole="docker-compose exec php bin/console" \
-    dexec="docker-compose exec" \
-    dcomposer-update="dexec php env COMPOSER_MEMORY_LIMIT=-1 composer update" \
     update-quick="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y" \
     update="update-quick && omz update && znap pull && brew upgrade && flatpak update -y" \
     sync-backgrounds="rclone sync ~/Pictures/Backgrounds Drive:Backgrounds" \
