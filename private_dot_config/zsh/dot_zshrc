@@ -146,6 +146,8 @@ exists 'yarn' && export PATH="$PATH:$(yarn global bin)"
 # direnv
 exists 'direnv' && eval "$(direnv hook zsh)"
 
+exists 'bob' && export PATH="$PATH:$HOME/.local/share/bob/nvim-bin"
+
 # rbenv
 if [ -f $HOME/.rbenv/bin ] ; then
   export PATH="$HOME/.rbenv/bin:$PATH"
