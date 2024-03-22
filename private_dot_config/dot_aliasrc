@@ -17,7 +17,9 @@ alias \
     cms="chezmoi -S ~/.local/share/chezmoi-scripts" \
     cmsl="chezmoi -S ~/.local/share/chezmoi-scripts-local" \
     bye="update-quick && sudo shutdown now" \
-    lsa="ls -lah"
+    lsa="ls -lah" \
+    vim="nvim" \
+    vi="nvim"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     ls="ls -hN --color=auto --group-directories-first"
