@@ -11,9 +11,6 @@
 [user]
 	email = marcusorjames@gmail.com
 	name = marcusorjames
-[credential]
-	helper = !aws codecommit credential-helper $@
-	UseHttpPath = true
 [log]
 	mailmap = true
 [gist]
