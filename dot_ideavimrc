@@ -1,4 +1,112 @@
-source ~/.config/nvim/init.vim
+syntax on
+try
+    source ~/.config/nvim/local.vim
+catch
+endtry
+
+let mapleader=" "
+
+" Searching set incsearch " highlight as you search
+set hlsearch " highlight all instances, see esc remap
+
+set noshowmode  " to get rid of thing like --INSERT--
+set hidden
+
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab " tabs are spaces
+set smartindent
+set nowrap
+set smartcase " Line Numbers
+set nu
+set relativenumber
+
+" Visual
+set noshowmatch " Prevents weird cursor jump on parenth match e.g. (hello)
+set scrolloff=8 " Scrolls at line
+set colorcolumn=80
+set mouse=a " Mouse select visual mode
+set list
+set listchars=tab:>\ ,trail:~,extends:\#,nbsp:.
+
+" Removes the swapfile and instead use undu plugin
+set noswapfile
+set nobackup
+set undodir=~/.vim/undodir
+set undofile
+
+set updatetime=100
+set shortmess+=c " Don't pass messages to |ins-completion-menu|.
+set clipboard=unnamedplus
+set noerrorbells " No dings
+
+" Folding
+set foldmethod=syntax " syntax highlighting items specify folds
+let javaScript_fold=1 " activate folding by JS syntax
+let php_folding=1
+set foldlevelstart=99 " start file with all folds opened
+
+" Filetype presets
+autocmd FileType javascript,javascriptreact setlocal ts=2 sts=2 sw=2
+
+" General
+nnoremap <ESC> :nohlsearch<CR>| " On esc remove search highlight
+nnoremap <silent> <leader>lg :LazyGit<CR>
+nnoremap <leader>u :UndotreeShow<CR>
+map <leader>o :setlocal spell! spelllang=en_gb<CR>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+map <c-t> :let $VIM_DIR=expand('%:p:h')<CR>:belowright split<CR>:terminal<CR>cd $VIM_DIR<CR>
+
+" TODO: Use hidden=true but need to exclude git
+" nnoremap <C-p> <cmd>Telescope find_files hidden=true<CR>
+" nnoremap <C-b> <cmd>Telescope buffers hidden=true<CR>
+" nnoremap <C-f> <cmd>Telescope live_grep hidden=true<CR>
+nnoremap <C-p> <cmd>Telescope find_files<CR>
+nnoremap <C-b> <cmd>Telescope buffers<CR>
+nnoremap <C-f> <cmd>Telescope live_grep<CR>
+
+" Fugitive
+nmap <leader>gl :diffget //3<CR>
+nmap <leader>gh :diffget //2<CR>
+nmap <leader>gs :G<CR>
+
+" Navigation and Windows
+nnoremap <leader>h :wincmd h<CR>
+nnoremap <leader>j :wincmd j<CR>
+nnoremap <leader>k :wincmd k<CR>
+nnoremap <leader>l :wincmd l<CR>
+nnoremap <silent>= :vertical resize +5<CR>
+nnoremap <silent>- :vertical resize -5<CR>
+nnoremap <silent>0 :vertical resize 100%<CR>
+
+" Map Shift Tab to tab left
+nnoremap <S-Tab> <<
+inoremap <S-Tab> <C-d>
+
+" Delete without setting clipboard
+xnoremap <leader>d "_d
+xnoremap <leader>p "_dP
+
+" Visual Multi
+let g:VM_maps = {}
+let g:VM_maps["Find Under"] = '<C-d>'
+
+"+========== General Commands ===========
+
+" Autotrim whitespace
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+autocmd BufWritePre * :call TrimWhitespace()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
 set surround
 set easymotion
 set commentary
