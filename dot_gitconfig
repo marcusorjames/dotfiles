@@ -21,8 +21,8 @@
 	branch = false
 [init]
 	templatedir = ~/.git-templates
-[includeIf "gitdir:~/Projects/doublebrace/"]
-    path = ~/.gitconfig-doublebrace
+[includeIf "gitdir:~/Projects/bolder/"]
+    path = ~/.gitconfig-bolder
 [safe]
 	directory = /var/www/vhosts
 	directory = ~/Projects
