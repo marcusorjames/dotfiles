@@ -131,6 +131,9 @@ export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # Set composer path
 export PATH=$PATH:~/.composer/vendor/bin
 
+# Set usr/bin PATH
+export PATH=$PATH:/usr/local/bin
+
 # Set scripts path
 export PATH=$PATH$( find $HOME/.scripts/ -type d -printf ":%p" )
 
