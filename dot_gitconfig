@@ -24,5 +24,4 @@
 [includeIf "gitdir:~/Projects/bolder/"]
     path = ~/.gitconfig-bolder
 [safe]
-	directory = /var/www/vhosts
-	directory = ~/Projects
+	directory = *
