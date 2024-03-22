@@ -1,7 +1,7 @@
 [global_config]
   inactive_color_offset = 0.8097165991902834
   title_use_system_font = False
-  title_font = 3270Medium Nerd Font Medium 9
+  title_font = JetBrainsMono Nerd Font Light 12
 [keybindings]
 [profiles]
   [[default]]
@@ -9,7 +9,7 @@
     background_darkness = 0.8
     background_type = transparent
     cursor_color = "#aaaaaa"
-    font = 3270Medium Nerd Font Medium 14
+    font = JetBrainsMono Nerd Font Light 12
     foreground_color = "#ebdbb2"
     show_titlebar = False
     scrollbar_position = hidden
