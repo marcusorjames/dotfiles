@@ -1,5 +1,7 @@
 README.md
 LICENSE
+.git
+.github
 {{- if eq .chezmoi.hostname "macblows98" }}
 .local
 .config/terminator/config
