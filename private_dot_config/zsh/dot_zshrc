@@ -137,6 +137,9 @@ export PATH=$PATH:/usr/local/bin
 # Set scripts path
 export PATH=$PATH$( find $HOME/.scripts/ -type d -printf ":%p" )
 
+# Set private scripts path
+export PATH=$PATH$( find $HOME/.scripts-private/ -type d -printf ":%p" )
+
 # Set yarn path
 exists 'yarn' && export PATH="$PATH:$(yarn global bin)"
 
