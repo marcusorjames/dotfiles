@@ -83,5 +83,9 @@ local plugins = {
       }
     end,
   },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "VeryLazy",
+  },
 }
 return plugins
