@@ -72,5 +72,16 @@ local plugins = {
       vim.g.DisableAutoPHPFolding = 0
     end,
   },
+  {
+    "mg979/vim-visual-multi",
+    event = "VeryLazy",
+    init = function()
+      vim.g.VM_maps = {
+        ["Find Under"] = "<C-d>",
+        ["Select Cursor Down"] = '<M-C-Down>',
+        ["Select Cursor Up"] = '<M-C-Up>'
+      }
+    end,
+  },
 }
 return plugins
