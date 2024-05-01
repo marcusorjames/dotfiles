@@ -18,7 +18,7 @@ local plugins = {
     version = "*",
     event = "VeryLazy",
     config = function()
-        require("nvim-surround").setup()
+      require("nvim-surround").setup()
     end
   },
   {
@@ -29,6 +29,8 @@ local plugins = {
         "prettier",
         "typescript-language-server",
         "lua-language-server",
+        "phpactor",
+        "php-cs-fixer",
       },
     },
   },
