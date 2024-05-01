@@ -14,3 +14,11 @@ lspconfig.tsserver.setup {
   --   }
   -- }
 }
+
+lspconfig.phpactor.setup{
+    on_attach = on_attach,
+    init_options = {
+        ["language_server_phpstan.enabled"] = true,
+        ["language_server_psalm.enabled"] = false,
+    }
+}
