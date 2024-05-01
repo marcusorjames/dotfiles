@@ -52,5 +52,18 @@ local plugins = {
       },
     },
   },
+  {
+    "motosir/skel-nvim",
+    event = "VeryLazy",
+    config = function()
+      require("skel-nvim").setup{
+        mappings = {
+          ['*.php'] = {"default.php.skel", "class.php.skel"},
+          -- patterns can map to multiple templates
+          ['LICENSE'] = {"license.mit.skel", "license.gpl.skel" }
+        }
+      }
+    end,
+  },
 }
 return plugins
