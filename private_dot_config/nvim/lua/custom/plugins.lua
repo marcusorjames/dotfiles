@@ -65,5 +65,12 @@ local plugins = {
       }
     end,
   },
+  {
+    "rayburgemeestre/phpfolding.vim",
+    event = "VeryLazy",
+    config = function()
+      vim.g.DisableAutoPHPFolding = 0
+    end,
+  },
 }
 return plugins
