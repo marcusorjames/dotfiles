@@ -13,6 +13,12 @@ M.custom = {
     ["<S-Tab>"] = { "<<", "Tab left" },
     ["<C-e>"] = { "<cmd> Telescope buffers <CR>", "Find buffers" },
     ["<leader><space>"] = { "<cmd> Telescope find_files <CR>", "Find files" },
+    ["<leader>a"] = { "<C-a>", "Increase number" },
+    ["<leader>lh"] = { function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+      end,
+      "Toggle inlay hint"
+    },
   },
   i = {
     ["<S-Tab>"] = { "<C-d>", "Tab left" },
