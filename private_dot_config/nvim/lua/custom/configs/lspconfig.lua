@@ -5,6 +5,8 @@ local capabilities = config.capabilities
 
 local lspconfig = require("lspconfig")
 
+local servers = { "tsserver", "twiggy_language_server", "phpactor", "gopls", "ansiblels", "marksman", "tailwindcss" }
+
 lspconfig.tsserver.setup {
   init_options = {
     preferences = {
@@ -18,12 +20,9 @@ lspconfig.tsserver.setup {
       importModuleSpecifierPreference = 'non-relative'
     },
   },
-  on_attach = on_attach,
-  capabilities = capabilities,
 }
 
 lspconfig.phpactor.setup{
-  on_attach = on_attach,
   init_options = {
     ["language_server_phpstan.enabled"] = true,
     ["language_server_psalm.enabled"] = false,
@@ -32,3 +31,10 @@ lspconfig.phpactor.setup{
     ["language_server_worse_reflection.inlay_hints.types"] = false,
   },
 }
+
+for _, lsp in ipairs(servers) do
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
+end

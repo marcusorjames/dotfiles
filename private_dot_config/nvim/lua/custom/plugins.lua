@@ -31,6 +31,7 @@ local plugins = {
         "lua-language-server",
         "phpactor",
         "php-cs-fixer",
+        "marksman",
       },
     },
   },

@@ -15,6 +15,12 @@ local M = {
     php = {
       require("formatter.filetypes.php").php_cs_fixer
     },
+    go = {
+      require("formatter.filetypes.go").gofmt
+    },
+    markdown = {
+      require("formatter.filetypes.markdown").prettier
+    },
     ["*"] = {
       require("formatter.filetypes.any").remove_trailing_whitespace
     },
