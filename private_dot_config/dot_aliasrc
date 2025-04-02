@@ -19,7 +19,8 @@ alias \
     bye="update-quick && sudo shutdown now" \
     lsa="ls -lah" \
     vim="nvim" \
-    vi="nvim"
+    vi="nvim" \
+    cd="z"
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     ls="ls -hN --color=auto --group-directories-first"
