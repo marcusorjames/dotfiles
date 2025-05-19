@@ -40,6 +40,6 @@ command -v nvim >/dev/null && alias vim="nvim" vi="nvim" vimdiff="nvim -d" # Use
 
 vf() { fzf | xargs -r -I % $EDITOR % ;}
 
-gcBo() { gcB "$(gb --show-current)" "origin/$(gb --show-current)" }
+gcBo() { git checkout -B "$(git branch --show-current)" "origin/$(git branch --show-current)" }
 
 [ -f ~/.config/.aliasrc_private ] && source ~/.config/.aliasrc_private
