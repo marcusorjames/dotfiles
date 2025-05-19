@@ -2,6 +2,7 @@ local M = {}
 
 M.custom = {
   n = {
+    ["<leader>qo"] = { ":w <bar> %bd <bar> e# <bar> bd# <CR>", "Close all other buffers" },
     ["<leader>o"] = { function ()
           vim.wo.spell = not vim.wo.spell
           vim.cmd("redraw")
