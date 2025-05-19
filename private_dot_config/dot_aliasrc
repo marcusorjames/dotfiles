@@ -3,7 +3,7 @@
 alias \
     debug="export XDEBUG_MODE=debug XDEBUG_SESSION=1" \
     update-quick="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y" \
-    update="update-quick && omz update && znap pull && brew upgrade && flatpak update -y" \
+    update="update-quick && znap pull && brew upgrade && flatpak update -y && omz update" \
     sync-backgrounds="rclone sync ~/Pictures/Backgrounds Drive:Backgrounds" \
     gcd="git checkout dev" \
     grbd="git rebase dev" \
