@@ -13,10 +13,11 @@ if [[ -d $ZSH ]]; then
     git
   )
 
-  source ~/.config/zsh/.znap
 
   # source $ZSH/oh-my-zsh.sh // This breaks everything big sad see znap config
 fi
+  
+source ~/.config/zsh/.znap
 
 exists()
 {
@@ -36,6 +37,7 @@ export KEYTIMEOUT=2
 # ---- VIM ---- #
 
 # Use vim keys in tab complete menu:
+zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
@@ -99,6 +101,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/home/linuxbrew/.linuxbrew/bin/brew" ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # bash_completion
+
+# Native zsh completion
+autoload -Uz compinit
+compinit
+
+# Enable bash completions in zsh
 autoload bashcompinit
 bashcompinit
 compat_dir=${BASH_COMPLETION_COMPAT_DIR:-/etc/bash_completion.d}
@@ -119,8 +127,8 @@ function __in_bash_this_works() { COMPREPLY=(blah); }
 
 complete -F __in_bash_this_works ls
 
-# fzf ctrl-r
-source /usr/share/doc/fzf/examples/key-bindings.zsh
+# fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
 export ANSIBLE_NOCOWS=1
 
@@ -135,10 +143,10 @@ export PATH=$PATH:~/.composer/vendor/bin
 export PATH=$PATH:/usr/local/bin
 
 # Set scripts path
-export PATH=$PATH$( find $HOME/.scripts/ -type d -printf ":%p" )
+[ -d "$HOME/.scripts" ] && export PATH="$PATH:$(find "$HOME/.scripts" -type d | paste -sd: -)"
 
 # Set private scripts path
-export PATH=$PATH$( find $HOME/.scripts-private/ -type d -printf ":%p" )
+[ -d "$HOME/.scripts-private" ] && export PATH="$PATH:$(find "$HOME/.scripts-private" -type d | paste -sd: -)"
 
 # Set yarn path
 exists 'yarn' && export PATH="$PATH:$(yarn global bin)"
@@ -146,10 +154,15 @@ exists 'yarn' && export PATH="$PATH:$(yarn global bin)"
 # direnv
 exists 'direnv' && eval "$(direnv hook zsh)"
 
-exists 'bob' && export PATH="$PATH:$HOME/.local/share/bob/nvim-bin"
+exists 'zoxide' && eval "$(zoxide init zsh)"
 
 # rbenv
 if [ -f $HOME/.rbenv/bin ] ; then
   export PATH="$HOME/.rbenv/bin:$PATH"
   eval "$(rbenv init -)"
+fi
+
+# cargo
+if [ -f $HOME/.cargo/env ] ; then
+  . "$HOME/.cargo/env"
 fi
