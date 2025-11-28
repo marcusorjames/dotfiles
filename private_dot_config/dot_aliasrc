@@ -15,7 +15,7 @@ alias \
     df='df -x"squashfs"' \
     cm="chezmoi" \
     cms="chezmoi -S ~/.local/share/chezmoi-scripts" \
-    cmsl="chezmoi -S ~/.local/share/chezmoi-scripts-local" \
+    cmsp="chezmoi -S ~/.local/share/chezmoi-scripts-private" \
     bye="update-quick && sudo shutdown now" \
     lsa="ls -lah" \
     vim="nvim" \
