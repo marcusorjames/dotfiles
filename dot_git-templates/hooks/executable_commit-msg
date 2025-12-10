@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ ! $(egrep "\[([A-Z]+)-([0-9]+)\]$" "${1}") ]]; then
+if [[ ! $(grep -E "\[([A-Z]+)-([0-9]+)\]$" "${1}") ]]; then
     echo
     printf "\e[1;33mNo Jira issue found in commit\e[0m\n\n"
 fi
@@ -15,14 +15,14 @@ else
     WORDS=$($ASPELL --mode=email --add-email-quote='#' list < "$TMPFILE" | sort -u)
 fi
 if [ -n "$WORDS" ] ; then
-    echo $(sed -e "s/[([A-Z]+)-([0-9]+)\]$/X/G" "$WORDS")
+    echo "$(sed 's/\([A-Z]\+\)-\([0-9]\+\)]$/X/g' "$WORDS")"
     printf "\e[1;33mPossible spelling errors found in commit message:\n\n\e[0m\e[0;31m%s\n\n\e[0m\e[1;33mUse git commit --amend to change the message.\e[0m\n\n" "$WORDS" >&2
 else
     printf "\e[92mSpelling ok\e[0m\n"
 fi
 BRANCH_NAME="$(git symbolic-ref HEAD 2>/dev/null | cut -d / -f 3)"
 if [[ "${BRANCH_NAME}" == "bugfix" ]]; then
-    RES=$(egrep "^Fix.*?\[[A-Z]+-[0-9]+\]$" "${1}")
+    RES=$(grep -E "^Fix.*?\[[A-Z]+-[0-9]+\]$" "${1}")
     if [[ $? -eq 0 ]]; then
     printf "\e[92mCommit message ok\e[0m\n"
     else
@@ -31,5 +31,4 @@ if [[ "${BRANCH_NAME}" == "bugfix" ]]; then
 fi
 
 trap "{ rm -f $TMPFILE; }" EXIT
-
 
