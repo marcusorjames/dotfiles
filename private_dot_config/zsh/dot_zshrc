@@ -168,3 +168,13 @@ fi
 if [ -f $HOME/.cargo/env ] ; then
   . "$HOME/.cargo/env"
 fi
+
+# Ensure an SSH agent with your GitHub key is available in interactive shells.
+if [[ $- == *i* ]]; then
+  if ! ssh-add -l >/dev/null 2>&1; then
+    if [[ -z "${SSH_AUTH_SOCK:-}" ]] || [[ ! -S "${SSH_AUTH_SOCK}" ]]; then
+      eval "$(ssh-agent -s)" >/dev/null
+    fi
+    [[ -f "$HOME/.ssh/id_ed25519" ]] && ssh-add "$HOME/.ssh/id_ed25519" >/dev/null 2>&1
+  fi
+fi
