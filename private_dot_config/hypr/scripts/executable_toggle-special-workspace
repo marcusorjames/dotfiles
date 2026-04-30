@@ -1,0 +1,10 @@
+#!/bin/bash
+
+special_workspace="$1"
+current_special_workspace=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .specialWorkspace.name')
+
+hyprctl dispatch togglespecialworkspace "$special_workspace"
+
+if [[ "$current_special_workspace" == "special:$special_workspace" ]]; then
+  exit 1
+fi
