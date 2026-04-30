@@ -1,0 +1,22 @@
+/* Only overrides for light wallpapers */
+@define-color text-colour #4F4F4F;
+
+/* Base text for all modules */
+* {
+  color: @text-colour;  /* dark gray, readable on both dark and light areas */
+}
+
+/* Active workspace buttons */
+#workspaces button.active {
+  color: @text-colour;
+}
+
+window#waybar {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px 6px;
+}
+
+tooltip {
+  background: rgba(255, 255, 255, 0.9);
+  color: @text-colour;
+}
