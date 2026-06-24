@@ -64,6 +64,16 @@ tooltip {
   padding: 2px;
 }
 
+menu,
+menu menuitem {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #4F4F4F;
+}
+
+menu menuitem:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
 #custom-update {
   font-size: 10px;
 }
@@ -109,4 +119,20 @@ tooltip {
 #custom-idle-indicator.active,
 #custom-notification-silencing-indicator.active {
   color: #a55555;
+}
+
+tooltip {
+  background: rgba(255, 255, 255, 0.9);
+  color: @text-colour;
+}
+
+#custom-weather {
+  margin-left: 7.5px;
+  margin-right: 7.5px;
+}
+
+#custom-weather.unavailable {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
 }
