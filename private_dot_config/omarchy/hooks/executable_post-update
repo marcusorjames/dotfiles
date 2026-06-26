@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Ensure dev tool ports are open for Docker xdebug connections
+sudo ufw allow 9000
+sudo ufw allow 9003
