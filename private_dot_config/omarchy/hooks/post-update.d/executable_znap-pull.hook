@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Update the zsh plugins managed by znap (zsh-snap). znap is a zsh function,
+# so it needs an interactive zsh with ~/.config/zsh/.zshrc loaded.
+command -v zsh >/dev/null || exit 0
+zsh -ic 'znap pull'

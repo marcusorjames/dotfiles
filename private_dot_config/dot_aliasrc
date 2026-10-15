@@ -3,7 +3,6 @@
 alias \
     debug="export XDEBUG_MODE=debug XDEBUG_SESSION=1" \
     update-quick="sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y" \
-    update="update-quick && znap pull && brew upgrade && flatpak update -y && omz update" \
     sync-backgrounds="rclone sync ~/Pictures/Backgrounds Drive:Backgrounds" \
     gcd="git checkout dev" \
     grbd="git rebase dev" \
@@ -35,6 +34,16 @@ if command -v eza &> /dev/null; then
   alias lt='eza --tree --level=2 --long --icons --git'
   alias lta='lt -a'
 fi
+
+# Omarchy's updater covers system packages and runs the post-update hooks
+# (including znap pull); other systems get the manual chain.
+update() {
+  if command -v omarchy-update >/dev/null; then
+    omarchy-update "$@"
+  else
+    update-quick && znap pull && brew upgrade && flatpak update -y && omz update
+  fi
+}
 
 # Scripts Edit
 se() { du -a ~/.dotfiles/* | awk '{print $2}' | grep "$1" | fzf -1 -0 | xargs  -r $EDITOR ;}
