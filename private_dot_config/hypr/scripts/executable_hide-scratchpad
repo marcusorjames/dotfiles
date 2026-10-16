@@ -4,7 +4,7 @@ active_workspace=$(hyprctl activewindow -j | jq -r '.workspace.name')
 
 if [[ "$active_workspace" == special:* ]]; then
     workspace_name="${active_workspace#special:}"
-    hyprctl dispatch togglespecialworkspace "$workspace_name"
+    hyprctl dispatch "hl.dsp.workspace.toggle_special('$workspace_name')"
 else
-    hyprctl dispatch killactive
+    hyprctl dispatch 'hl.dsp.window.close()'
 fi
