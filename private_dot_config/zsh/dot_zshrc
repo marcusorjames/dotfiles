@@ -19,6 +19,8 @@ fi
   
 source ~/.config/zsh/.znap
 
+RPROMPT='%F{240}%T%f'
+
 exists()
 {
   command -v "$1" >/dev/null 2>&1
